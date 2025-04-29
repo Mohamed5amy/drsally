@@ -1,0 +1,31 @@
+@import 'mouse-follower/dist/mouse-follower.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  :root {
+    --bg : 165, 20%, 96%;
+    --primary : 183, 24%, 51%;
+    --secondary : 24, 71%, 69%;
+    --text-primary : 180, 11%, 98%;
+    --primary-text : 184, 23%, 25%;
+    --secondary-text : 180, 7%, 39%;
+    --light-text : 180, 7%, 39%;
+    --third-text : 180, 11%, 98%;
+  }
+  /* .dark {
+    
+  } */
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-primaryText;
+  }
+}

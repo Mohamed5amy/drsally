@@ -1,0 +1,92 @@
+body {
+  cursor: none;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Body Width */
+.container {
+  max-width: 1440px;
+  margin: auto;
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+@media (max-width : 1200px) {
+  .container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+@media (max-width : 900px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (max-width : 600px) {
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+
+
+/* Hide the arrows in Chrome, Safari, and Edge */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide the arrows in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Start Scrollbar */
+::-webkit-scrollbar{
+	width: 4px;
+  height: 0px;
+}
+::-webkit-scrollbar-track{
+	background-color: transparent;
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 8px;
+	background-color: hsl(152, 63%, 43%);	
+	background-image: 
+  -webkit-linear-gradient(45deg,
+  rgba(255, 255, 255, .2) 25%,
+  transparent 25%,
+  transparent 50%,
+  rgba(255, 255, 255, .2) 50%,
+  rgba(255, 255, 255, .2) 75%,
+  transparent 75%,
+  transparent)
+}
+/* End Scrollbar */
+
+input::placeholder {
+  transition: .5s;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+}
+
+/* Hover Effect Mouse */
+.hover-effect {
+  transition: color 1s ease;
+}
