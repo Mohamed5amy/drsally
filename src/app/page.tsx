@@ -1,5 +1,6 @@
 import Loading from "@/components/custom/Loading";
 import CustomCursor from "@/components/CustomCursor";
+import Blogs from "@/sections/Home/Blogs";
 import Credentials from "@/sections/Home/Credentials";
 import FirstStep from "@/sections/Home/FirstStep";
 import Flexible from "@/sections/Home/Flexible";
@@ -21,7 +22,7 @@ export default function Home() {
       <Flexible />
       <FirstStep />
       <Testimonials />
-      <FirstStep />
+      <Blogs />
     </div>
   )
 }

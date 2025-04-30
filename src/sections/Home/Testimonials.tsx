@@ -67,7 +67,7 @@ const Testimonials = () => {
         <p className='text-lightText text-xl mb-8 text-center'>Hear from others who have worked with me on their journey toward healing and growth.</p>
         {/* Boxes */}
         <div className="flex gap-10" ref={containerRef}>
-            {[...Array(10)].map((_, idx) => (
+            {[...Array(5)].map((_, idx) => (
             <div
                 key={idx}
                 className="min-w-[45vw] max-w-[45vw] py-12 px-10 rounded-2xl bg-textPrimary relative testimonial-box"

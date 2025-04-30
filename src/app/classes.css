@@ -90,3 +90,8 @@ input:focus::placeholder {
 .hover-effect {
   transition: color 1s ease;
 }
+
+/* Blog box shadow */
+.blogShadow {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}

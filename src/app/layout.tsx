@@ -6,6 +6,7 @@ import ClientAOS from "@/hooks/ClientAOS";
 import { ToastContainer } from 'react-toastify';
 import CustomCursor from '@/components/CustomCursor';
 import Nav from '@/components/custom/Nav';
+import Footer from '@/components/custom/Footer';
 
 const publicSans = Public_Sans({
   subsets: ['latin'],
@@ -34,6 +35,7 @@ export default function RootLayout({
         <CustomCursor />
         {children}
         <ToastContainer position='bottom-right' />
+        <Footer />
       </body>
     </html>
   )

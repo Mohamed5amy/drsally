@@ -1,0 +1,76 @@
+import { mail } from '@/icons'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import Link from 'next/link'
+import linkedIn from "@/animatedIcons/linkedIn.json" 
+import facebook from "@/animatedIcons/facebook.json" 
+import insta from "@/animatedIcons/insta.json" 
+import x from "@/animatedIcons/x.json" 
+import NormalButton from './NormalButton'
+
+const HoverLottie = dynamic(() => import('@/components/HoverLottie'))
+
+
+const Footer = () => {
+  return (
+    <div className='container py-6 flex flex-col gap-8 bg-textPrimary'>
+        {/* Upper */}
+        <div className='flex justify-between pb-8 border-b border-[#C8DCD7]'>
+            {/* Logo */}
+            <div className=''> <Image src={"/footerLogo.svg"} alt='Logo' width={236} height={150} /> </div>
+            {/* Quick Links */}
+            <div className='capitalize'>
+                <h4 className='text-xl font-semibold mb-2'>quick links</h4>
+                <p className='text-xl pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>Appointments</p>
+                <p className='text-xl pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>About</p>
+                <p className='text-xl pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>Services</p>
+                <p className='text-xl pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>Testimonials</p>
+                <p className='text-xl pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>Blog</p>
+                <p className='text-xl transition-all hover:text-red-600 font-semibold text-lightText'>Contact</p>
+            </div>
+            {/* Contact */}
+            <div className=''>
+                <h4 className='text-xl font-semibold mb-4'>Contact Us</h4>
+                {/* Mail */}
+                <Link href={"mailto:sally@sallymounir.com"} className='flex items-center gap-2 text-xl font-semibold text-lightText'> {mail} Sally@sallymounir.com </Link>
+                {/* Social */}
+                <h4 className='text-xl font-semibold mb-4 mt-10'>Stay In Touch</h4>
+                <div className='flex gap-4'>
+                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={linkedIn} w={40} h={40} /> 
+                    </div>
+                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={insta} w={40} h={40} /> 
+                    </div>
+                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={facebook} w={40} h={40} /> 
+                    </div>
+                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={x} w={40} h={40} /> 
+                    </div>
+                </div>
+            </div>
+            {/* Newsletter */}
+            <div className='max-w-[326px]'>
+                <h4 className='text-xl font-semibold mb-4'>Subscribe</h4>
+                <p className='text-xl text-lightText mb-4'> Sign up with your email address to receive news and updates. </p>
+                <div className='relative'>
+                    <input type="email" placeholder='Email Address' className='p-4 rounded-full w-full caret-primary placeholder:text-lightText' />
+                    <NormalButton label='Subscribe' styles='py-3 px-6 hover:px-7 absolute right-1 top-1' />
+                </div>
+            </div>
+        </div>
+        {/* Lower */}
+        <div className='flex items-center justify-between'>
+            <div className='flex gap-6'>
+                <Image src={"/certificate1.svg"} alt='certificate' width={200} height={60} />
+                <Image src={"/certificate2.svg"} alt='certificate' width={200} height={60} />
+            </div>
+            {/* Rights */}
+            <p className='text-xl font-semibold'> © {new Date().getFullYear()} All Rights Reserved | Powered by <Link href={"https://www.mssmsolutions.com/"} target='_blank' className='transition-colors hover:text-secondary'>MSSM</Link> Solutions </p>
+        </div>
+    </div>
+  )
+}
+
+export default Footer

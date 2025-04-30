@@ -8,7 +8,7 @@ const FirstStep = () => {
         {/* Buttons */}
         <div className="flex items-center justify-center gap-4">
             <NormalButton label="Book a Consultation" />
-            <NormalButton label="Contact me" styles="px-[70px] bg-[rgba(250,251,251,0.60)] !text-primary border border-primary hover:px-[85px]" />
+            <NormalButton label="Contact me" styles="px-[70px] !bg-[rgba(250,251,251,0.60)] hover:!bg-secondary !text-primary border border-primary hover:px-[85px]" />
         </div>
     </div>
   )
