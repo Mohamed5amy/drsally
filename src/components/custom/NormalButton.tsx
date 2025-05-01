@@ -1,4 +1,3 @@
-import React from 'react'
 
 const NormalButton = ({label , styles} : {label : string , styles? : string}) => {
   return (

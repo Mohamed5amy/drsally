@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 import clab from "@/animatedIcons/clab.json" 
 import prize from "@/animatedIcons/prize.json" 
 
-const HoverLottie = dynamic(() => import('@/components/HoverLottie'))
+const HoverLottie = dynamic(() => import('@/components/HoverLottie') , {ssr : false})
 
 
 const Credentials = () => {

@@ -8,7 +8,8 @@ import insta from "@/animatedIcons/insta.json"
 import x from "@/animatedIcons/x.json" 
 import NormalButton from './NormalButton'
 
-const HoverLottie = dynamic(() => import('@/components/HoverLottie'))
+const HoverLottie = dynamic(() => import('@/components/HoverLottie') , {ssr : false})
+
 
 
 const Footer = () => {
