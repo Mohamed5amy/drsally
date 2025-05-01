@@ -59,9 +59,6 @@ const Loading = () => {
         <div className="absolute left-20 bottom-0" data-aos="fade-up">
             <Image src={"/flower.svg"} alt="flower" height={400} width={200} />
         </div>
-        <div className="absolute right-20 bottom-0" data-aos="fade-up" data-aos-delay="1000">
-            <Image src={"/flower.svg"} alt="flower" height={400} width={200} />
-        </div>
     </div>
   )
 }

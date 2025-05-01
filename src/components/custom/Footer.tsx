@@ -15,7 +15,7 @@ const Footer = () => {
   return (
     <div className='container py-6 flex flex-col gap-8 bg-textPrimary'>
         {/* Upper */}
-        <div className='flex justify-between pb-8 border-b border-[#C8DCD7]'>
+        <div className='flex justify-between flex-wrap gap-10 pb-8 border-b border-[#C8DCD7]'>
             {/* Logo */}
             <div className=''> <Image src={"/footerLogo.svg"} alt='Logo' width={236} height={150} /> </div>
             {/* Quick Links */}
@@ -61,13 +61,13 @@ const Footer = () => {
             </div>
         </div>
         {/* Lower */}
-        <div className='flex items-center justify-between'>
-            <div className='flex gap-6'>
+        <div className='flex flex-col gap-4 md:flex-row items-center justify-between'>
+            <div className='flex flex-col gap-2 md:gap-6 md:flex-row'>
                 <Image src={"/certificate1.svg"} alt='certificate' width={200} height={60} />
                 <Image src={"/certificate2.svg"} alt='certificate' width={200} height={60} />
             </div>
             {/* Rights */}
-            <p className='text-xl font-semibold'> © {new Date().getFullYear()} All Rights Reserved | Powered by <Link href={"https://www.mssmsolutions.com/"} target='_blank' className='transition-colors hover:text-secondary'>MSSM</Link> Solutions </p>
+            <p className='text-xl font-semibold text-center md:text-start'> © {new Date().getFullYear()} All Rights Reserved | Powered by <Link href={"https://www.mssmsolutions.com/"} target='_blank' className='transition-colors hover:text-secondary'>MSSM</Link> Solutions </p>
         </div>
     </div>
   )

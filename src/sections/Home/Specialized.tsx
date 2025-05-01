@@ -4,11 +4,11 @@ import Image from "next/image"
 
 const Specialized = () => {
   return (
-    <div className="py-20 container flex gap-16 items-center">
+    <div className="py-8 sm:py-20 flex-col lg:flex-row container flex gap-16 items-center">
         {/* Content */}
         <div className="flex-[1.1]">
-            <h3 className="text-3xl font-bold pb-2"> Specialized Holistic Therapy for Lasting Mental Well-being </h3>
-            <p className="text-lightText text-xl mb-10">
+            <h3 className="text-xl md:text-3xl font-bold pb-2"> Specialized Holistic Therapy for Lasting Mental Well-being </h3>
+            <p className="text-lightText text-[16px] md:text-xl mb-10">
             I specialise in addressing various mental health challenges with a scientifically grounded holistic approach. My training is continuously updated with the latest advancements in neuroscience and psychology, allowing me to offer therapy that targets the core issues that may have kept you feeling stuck.
             <span className="block h-2"></span>
             I understand that many people seek therapy to see tangible progress and lasting change. While ongoing support can benefit some, my focus is on empowering you to achieve meaningful results and build a fulfilling life as efficiently as possible. Let's begin that journey today.
