@@ -1,3 +1,5 @@
+"use client"
+
 import { mail } from '@/icons'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
