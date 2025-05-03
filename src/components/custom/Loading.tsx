@@ -26,7 +26,7 @@ const Loading = () => {
     
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center h-screen w-screen overflow-hidden bg-bg" ref={boxRef}>
-        <div className="flex items-center gap-3 relative scale-[2]">
+        <div className="flex items-center gap-3 relative scale-[1] sm:scale-[2]">
             {/* logo */}
             <Image src={"/icon.svg"} alt="Icon" width={54} height={56} data-aos-duration="1500" data-aos="fade-down-right" data-aos-delay="2500" />
             {/* Name */}

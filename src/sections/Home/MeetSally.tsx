@@ -1,3 +1,4 @@
+import AnimatedTitle from "@/components/AnimatedTitle"
 import Button from "@/components/custom/Button"
 import { calenderIcon, star } from "@/icons"
 
@@ -7,7 +8,7 @@ const MeetSally = () => {
         <div className="container flex justify-end pb-32 pt-24">
             <div className="max-w-[624px]">
                 <p className="text-[32px] font-bold text-primary mb-2"> Meet Sally </p>
-                <p className="text-[32px] font-bold text-primaryText mb-2"> Your Empathetic and Globally Minded Therapist </p>
+                <AnimatedTitle className="text-[32px] font-bold text-primaryText mb-2"> Your Empathetic and Globally Minded Therapist </AnimatedTitle>
                 <p className="text-xl text-lightText mb-2">
                     I'm Sally, a mother of two wonderful adult daughters and someone who has embraced the "trailing spouse" experience across numerous countries. This incredible journey has immersed me in diverse cultures, rich history, vibrant arts, and delicious food on nearly every continent.
                 </p>

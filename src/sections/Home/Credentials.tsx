@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic"
 import clab from "@/animatedIcons/clab.json" 
 import prize from "@/animatedIcons/prize.json" 
+import NormalButton from "@/components/custom/NormalButton"
+import AnimatedTitle from "@/components/AnimatedTitle"
 
 const HoverLottie = dynamic(() => import('@/components/HoverLottie') , {ssr : false})
 
@@ -10,7 +12,7 @@ const HoverLottie = dynamic(() => import('@/components/HoverLottie') , {ssr : fa
 const Credentials = () => {
   return (
     <div className='text-center pb-20 container'>
-        <h3 className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold'> Professional Credentials </h3>
+        <AnimatedTitle className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold'> Professional Credentials </AnimatedTitle>
         <p className='text-lightText text-sm md:text-xl mb-12'>Certified and licensed by leading therapeutic associations, ensuring you receive the highest standard of care.</p>
         {/* Boxes */}
         <div className="flex flex-col md:flex-row gap-10 mb-10">
@@ -26,9 +28,7 @@ const Credentials = () => {
             </div>
         </div>
         {/* Button */}
-        <button className="text-textPrimary font-semibold transition-all hover:bg-secondary hover:px-14 py-4 px-10 rounded-full bg-primary">
-            Get in Touch
-        </button>
+        <NormalButton label="Get In Touch" />
     </div>
   )
 }

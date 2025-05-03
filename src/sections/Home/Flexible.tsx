@@ -1,3 +1,4 @@
+import AnimatedTitle from "@/components/AnimatedTitle"
 import Button from "@/components/custom/Button"
 import { calenderIcon, star } from "@/icons"
 import Image from "next/image"
@@ -11,7 +12,7 @@ const Flexible = () => {
         </div>
         {/* Content */}
         <div className="flex-[1.1]">
-            <h3 className="text-xl md:text-3xl font-bold pb-2"> To make therapy as accessible and comfortable as possible, I offer flexible options to suit your needs. </h3>
+            <AnimatedTitle className="text-xl md:text-3xl font-bold pb-2"> To make therapy as accessible and comfortable as possible, I offer flexible options to suit your needs. </AnimatedTitle>
             <p className="text-lightText text-[16px] md:text-xl mb-6">
             Embrace the convenience and privacy of online sessions from the comfort of your home. Alternatively, for those who find movement and the outdoors beneficial, consider walk-and-talk therapy sessions in a park setting. This approach, which gained significant popularity during the pandemic and continues to help many, harnesses the powerful connection between  movement, nature, and psychological well-being.
             </p>

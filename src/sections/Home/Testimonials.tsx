@@ -1,5 +1,6 @@
 "use client"
 
+import AnimatedTitle from "@/components/AnimatedTitle";
 import { quotation } from "@/icons"
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -63,7 +64,7 @@ const Testimonials = () => {
     
   return (
     <div className="py-20 overflow-hidden relative mb-0 md:mb-36" ref={sectionRef}>
-        <h3 className='text-primaryText mb-2 text-[32px] font-bold text-center'> Client Experiences </h3>
+        <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'> Client Experiences </AnimatedTitle>
         <p className='text-lightText text-xl mb-8 text-center'>Hear from others who have worked with me on their journey toward healing and growth.</p>
         {/* Boxes */}
         <div className="flex gap-10" ref={containerRef}>

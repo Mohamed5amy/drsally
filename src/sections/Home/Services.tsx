@@ -1,3 +1,4 @@
+import AnimatedTitle from '@/components/AnimatedTitle'
 import NormalButton from '@/components/custom/NormalButton'
 import { correct } from '@/icons'
 import Image from 'next/image'
@@ -6,7 +7,7 @@ import React from 'react'
 const Services = () => {
   return (
     <div className='py-8 sm:py-20 container'>
-        <h3 className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold text-center'> Services I Offer </h3>
+        <AnimatedTitle className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold text-center'> Services I Offer </AnimatedTitle>
         <p className='text-lightText text-sm md:text-xl mb-12 text-center'>Tailored therapeutic support to help you navigate life's challenges and discover your path to well-being.</p>
         {/* Boxes */}
         <div className="flex flex-col md:flex-row gap-10 mb-10">

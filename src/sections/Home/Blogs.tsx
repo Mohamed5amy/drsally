@@ -1,12 +1,10 @@
+import AnimatedTitle from '@/components/AnimatedTitle'
 import Blog from '@/components/ui/Blog'
-import { rightArrow } from '@/icons'
-import Image from 'next/image'
-import React from 'react'
 
 const Blogs = () => {
   return (
     <div className='pb-20 container'>
-        <h3 className='text-primaryText mb-8 text-[32px] font-bold text-center'> Our Blog </h3>
+        <AnimatedTitle className='text-primaryText mb-8 text-[32px] font-bold text-center'> Our Blog </AnimatedTitle>
         <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
             {[...Array(4)].map((_ , i) => {
                 return <Blog i={i} key={i} />
