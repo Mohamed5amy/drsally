@@ -23,7 +23,7 @@ const AnimatedTitle = ({ children, className = "" , delay } : {children : ReactN
       // Animate them in
       gsap.from(split.chars, {
         duration: 1.5,
-        yPercent: "100",
+        yPercent: "random(100 , -100)",
         rotate : "random(30 , -30)",
         opacity: 0,
         // delay : delay ? 4 : 0,

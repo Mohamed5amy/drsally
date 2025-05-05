@@ -1,5 +1,6 @@
 import AnimatedTitle from "@/components/AnimatedTitle"
 import Button from "@/components/custom/Button"
+import Magnetic from "@/components/Magnetic"
 import { calenderIcon } from "@/icons"
 import Image from "next/image"
 
@@ -12,7 +13,7 @@ const Main = () => {
             <Button label="Schedule Your Free Consultation" icon={calenderIcon} />
         </div>
         <div className="flex-[1]">
-            <Image src={"/main1.svg"} alt="Dr Sally Image" width={650} height={600} />
+            <Magnetic strength={0.02}> <Image src={"/main1.svg"} alt="Dr Sally Image" width={650} height={600} /> </Magnetic>
         </div>
     </div>
   )

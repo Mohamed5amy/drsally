@@ -9,7 +9,7 @@ const Menu = ({list} : {list : {name : string , link : string}[]}) => {
   const [active, setActive] = useState(false)
   return (
     <>
-        <div onClick={() => setActive(prev => !prev)}> <MenuToggle /> </div>
+        <div onClick={() => setActive(prev => !prev)} className="flex lg:hidden"> <MenuToggle /> </div>
         {active && <div className="fixed inset-0 bg-primary z-10 flex flex-col text-textPrimary text-3xl font-bold gap-8 items-center justify-center" data-aos="fade-in">
             {/* items */}
             {list.map((item , i) => {
