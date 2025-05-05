@@ -39,17 +39,17 @@ const Footer = () => {
                 {/* Social */}
                 <h4 className='text-xl font-semibold mb-4 mt-10'>Stay In Touch</h4>
                 <div className='flex gap-4'>
-                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
-                        <HoverLottie icon={linkedIn} w={40} h={40} /> 
+                    <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={linkedIn} w={30} h={30} /> 
                     </div>
-                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
-                        <HoverLottie icon={insta} w={40} h={40} /> 
+                    <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={insta} w={30} h={30} /> 
                     </div>
-                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
-                        <HoverLottie icon={facebook} w={40} h={40} /> 
+                    <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={facebook} w={30} h={30} /> 
                     </div>
-                    <div className='w-16 h-16 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
-                        <HoverLottie icon={x} w={40} h={40} /> 
+                    <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <HoverLottie icon={x} w={30} h={30} /> 
                     </div>
                 </div>
             </div>
