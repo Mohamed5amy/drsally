@@ -13,7 +13,7 @@ import Testimonials from "@/sections/Home/Testimonials";
 export default function Home() {
   return (
     <div className="max-w-[100vw] overflow-x-hidden" >
-      {/* <Loading /> */}
+      <Loading />
       <Main />
       <Credentials />
       <MeetSally />

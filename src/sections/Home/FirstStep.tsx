@@ -16,11 +16,11 @@ const FirstStep = () => {
             <NormalButton label="Contact me" styles="px-[70px] !bg-[rgba(250,251,251,0.60)] hover:!bg-secondary !text-primary border border-primary hover:px-[85px]" />
         </div>
         {/* Image */}
-          <div className="absolute inset-0 z-[-1]"> 
-            <ScaleBlurReveal>
-              <Image src={"/main5.svg"} alt="Dr Sally Image" width={1500} height={470} className="w-full h-full object-cover" /> 
-            </ScaleBlurReveal>
-          </div>
+        <div className="absolute inset-0 z-[-1]"> 
+          <ScaleBlurReveal>
+            <Image src={"/main5.svg"} alt="Dr Sally Image" width={1500} height={470} className="w-full h-full object-cover" /> 
+          </ScaleBlurReveal>
+        </div>
     </div>
   )
 }

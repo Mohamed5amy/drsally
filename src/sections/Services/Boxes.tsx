@@ -5,10 +5,9 @@ import NormalButton from '@/components/custom/NormalButton'
 import { correct } from '@/icons'
 import Image from 'next/image'
 import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useEffect, useRef } from 'react'
 
-const Services = () => {
+const Boxes = () => {
 
     const leftBox = useRef(null)
     const rightBox = useRef(null)
@@ -22,12 +21,12 @@ const Services = () => {
       gsap.from(
         box1,
         {
-          y : 100,
+          y : 150,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: box1,
             start : "top bottom",
-            end : "bottom top",
+            end : "bottom center",
             scrub: true,
           },
         }
@@ -41,7 +40,7 @@ const Services = () => {
             scrollTrigger: {
               trigger: box2,
               start : "top bottom",
-              end : "bottom top",
+              end : "bottom center",
               scrub: true,
             },
           }
@@ -54,8 +53,12 @@ const Services = () => {
     
   return (
     <div className='py-8 sm:py-20 container'>
-        <AnimatedTitle className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold text-center'> Services I Offer </AnimatedTitle>
-        <p className='text-lightText text-sm md:text-xl mb-12 text-center'>Tailored therapeutic support to help you navigate life's challenges and discover your path to well-being.</p>
+        <AnimatedTitle className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold'> Psychology Services </AnimatedTitle>
+        <p className='text-lightText text-sm md:text-xl mb-12'>
+            I'm here as your trusted ally in psychotherapy, offering you the support and insight you need to become more conscious of who you are and achieve your goals. <br />
+            I offer individual therapy, counseling, coaching and more, designed to give you the tools you need to master your own powerful transformation and build a healthier, happier life that awaits you. <br />
+            Join me as we open the door to transformation, growth, and long-term wellness, all while on the path to long-term healing.
+        </p>
         {/* Boxes */}
         <div className="flex flex-col md:flex-row gap-10 mb-10">
             <div className="py-6 px-6 md:px-10 rounded-2xl flex flex-col gap-2 items-start bg-textPrimary flex-1 relative group overflow-hidden" ref={leftBox}>
@@ -92,4 +95,4 @@ const Services = () => {
   )
 }
 
-export default Services
+export default Boxes

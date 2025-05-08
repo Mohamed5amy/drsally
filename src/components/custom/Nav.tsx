@@ -1,8 +1,11 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import Button from "./Button"
 import { calenderIcon } from "@/icons"
 import Menu from "./Menu"
+import { usePathname } from "next/navigation"
 
 const Nav = () => {
 
@@ -14,6 +17,9 @@ const Nav = () => {
     {name : "Blog" , link : "/blog"},
     {name : "Contact" , link : "/contact"},
   ]
+
+  const pathname = usePathname()
+  console.log(pathname)
   
   return (
     <div className="container flex items-center justify-between py-6 bg-bg">
@@ -23,7 +29,13 @@ const Nav = () => {
       <div className="hidden lg:flex items-center gap-10">
         <div className="flex items-center">
           {list.map((item , i) => {
-            return <Link href={item.link} key={i} className="text-lg font-semibold text-secondaryText px-2"> {item.name} </Link>
+            return <Link href={item.link} key={i} 
+            className={`text-lg font-semibold ${pathname === item.link ? "text-primary active" : "text-secondaryText"} px-2 relative`}>
+              {item.name}
+              <div className={`${pathname === item.link ? "absolute" : "hidden"} left-1/2 -translate-x-1/2 -bottom-8 w-10 h-8 scale-125 z-0 rotate-[50deg]`}>
+                <Image src={"/flower.svg"} alt="Flower Image" width={40} height={30} className="w-full h-full" />
+              </div>
+            </Link>
           })}
         </div>
         {/* Button */}
