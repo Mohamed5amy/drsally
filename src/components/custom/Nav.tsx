@@ -24,7 +24,9 @@ const Nav = () => {
   return (
     <div className="container flex items-center justify-between py-6 bg-bg">
       {/* Logo */}
-      <Image src={"/logo.svg"} alt="Logo" width={290} height={56} className="max-w-[230px] sm:max-w-[290px]" />
+      <Link href={"/"}>
+        <Image src={"/logo.svg"} alt="Logo" width={290} height={56} className="max-w-[230px] sm:max-w-[290px]" />
+      </Link>
       {/* List */}
       <div className="hidden lg:flex items-center gap-10">
         <div className="flex items-center">

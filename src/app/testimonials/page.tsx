@@ -1,10 +1,10 @@
-import Header from "@/sections/Testimonials/Header"
+import Header from "@/sections/Blog/Header"
 import Testimonials from "@/sections/Testimonials/Testimonials"
 
 const page = () => {
   return (
     <div>
-        <Header />
+        <Header label="Testimonials" />
         <Testimonials />
     </div>
   )

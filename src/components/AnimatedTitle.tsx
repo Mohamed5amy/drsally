@@ -12,37 +12,45 @@ const AnimatedTitle = ({ children, className = "" , delay } : {children : ReactN
   const titleRef = useRef(null);
 
   useEffect(() => {
-    // Make sure we're in the browser and the element exists
+    let split : any;
+    let anim : any;
+
     if (titleRef.current) {
-      // Create the SplitText instance
-      let split = new SplitText(titleRef.current, {
-        type: "chars,words", 
+      // Split text
+      split = new SplitText(titleRef.current, {
+        type: "chars,words",
         position: "relative"
       });
-      
-      // Animate them in
-      gsap.from(split.chars, {
+
+      // Animate
+      anim = gsap.from(split.chars, {
         duration: 1.5,
-        yPercent: "random(100 , -100)",
-        rotate : "random(30 , -30)",
+        yPercent: "random(100, -100)",
+        rotate: "random(30, -30)",
         opacity: 0,
-        // delay : delay ? 4 : 0,
+        delay: delay ? 4 : 0,
         stagger: {
-            from: "random",
-            amount: 0.6,
+          from: "random",
+          amount: 0.6
         },
         ease: "power3.out",
-        scrollTrigger : {
-            trigger : titleRef.current,
-            start: "top bottom-=200",
-            end: "bottom top",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top bottom-=200",
+          end: "bottom top",
         }
       });
     }
-    
-    // Cleanup function
+
     return () => {
-      // Any cleanup if needed
+      // Kill animation
+      if (anim) anim.kill();
+
+      // Kill scroll triggers
+      ScrollTrigger.getAll().forEach(t => t.kill());
+
+      // Revert SplitText
+      if (split) split.revert();
     };
   }, []);
 

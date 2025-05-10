@@ -13,7 +13,7 @@ const Testimonials = () => {
           {/* Boxes */}
           <div className="flex gap-10">
               {[...Array(2)].map((_, idx) => (
-              <Magnetic strength={0.05}>
+              <Magnetic strength={0.05} key={idx}>
                 <div
                     key={idx}
                     className="py-12 px-10 rounded-2xl bg-textPrimary relative"

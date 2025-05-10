@@ -4,7 +4,7 @@ import React from 'react'
 
 const Blog = ({i} : {i : number}) => {
   return (
-    <div className='rounded-3xl bg-textPrimary overflow-hidden blogShadow transition-all group hover:-translate-y-2' data-aos="fade-right" data-aos-delay={i * 200} data-aos-offset="1000">
+    <div className='rounded-3xl bg-textPrimary overflow-hidden blogShadow transition-all group hover:-translate-y-2' data-aos="fade-right" data-aos-delay={i * 200}>
         {/* Image */}
         <div className='overflow-hidden'><Image src={"https://picsum.photos/50" + i} alt='Blog Image' width={500} height={230} className='group-hover:scale-125 transition-transform' /></div>
         {/* Content */}

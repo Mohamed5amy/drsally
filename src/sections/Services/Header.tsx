@@ -1,7 +1,6 @@
 import AnimatedTitle from '@/components/AnimatedTitle'
 import { homeIcon, rightChevron } from '@/icons'
 import Image from 'next/image'
-import React from 'react'
 
 const Header = () => {
   return (
