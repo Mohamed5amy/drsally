@@ -6,7 +6,7 @@ import Image from "next/image"
 
 const Specialized = () => {
   return (
-    <div className="py-8 sm:py-20 flex-col lg:flex-row container flex gap-16 items-center">
+    <div className="py-0 sm:py-20 flex-col lg:flex-row container flex gap-16 items-center">
         {/* Content */}
         <div className="flex-[1.1]">
             <Parallax distance={150} direction="up" end="bottom center">

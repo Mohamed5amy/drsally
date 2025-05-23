@@ -53,7 +53,7 @@ const ScaleBlurReveal: React.FC<ScaleBlurRevealProps> = ({
   }, [start, end, scaleFrom, blurFrom]);
 
   return (
-    <div ref={elRef} style={{ willChange: 'transform, filter' }}>
+    <div ref={elRef} style={{ willChange: 'transform, filter' }} className='w-full h-full'>
       {children}
     </div>
   );

@@ -71,7 +71,7 @@ const Footer = () => {
                     <Image src={"/certificate2.svg"} alt='certificate' width={200} height={60} />
                 </div>
                 {/* Rights */}
-                <p className='text-xl font-semibold text-center md:text-start'> © {new Date().getFullYear()} All Rights Reserved | Powered by <Link href={"https://www.mssmsolutions.com/"} target='_blank' className='transition-colors hover:text-secondary'>MSSM</Link> Solutions </p>
+                <p className='text-lg sm:text-lg font-semibold text-center md:text-start'> © {new Date().getFullYear()} All Rights Reserved | Powered by <Link href={"https://www.mssmsolutions.com/"} target='_blank' className='transition-colors hover:text-secondary'>MSSM</Link> Solutions </p>
             </div>
         </div>
     </div>

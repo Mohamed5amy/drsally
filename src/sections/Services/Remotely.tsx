@@ -7,7 +7,7 @@ import React from 'react'
 const Remotely = () => {
   return (
     <div className='bg-textPrimary'>
-      <div className='container flex items-center gap-16 py-20'>
+      <div className='container flex flex-col md:flex-row items-center gap-16 py-20'>
           <div className='flex-1'>
             <Parallax direction='up' end='bottom center'>
               <AnimatedTitle className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold'>In-person and remote options</AnimatedTitle>

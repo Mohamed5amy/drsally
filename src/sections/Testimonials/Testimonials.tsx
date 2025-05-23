@@ -59,7 +59,7 @@ const Testimonials = () => {
           <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'> Clients that have pursued therapy know they are in good hands with me. Here is what some of them have to say: </AnimatedTitle>
           <p className='text-lightText text-xl mb-8 text-center'>Hear from others who have worked with me on their journey toward healing and growth.</p>
           {/* 2 Cols */}
-          <div className="flex gap-10">
+          <div className="flex flex-col md:flex-row gap-10">
             {/* Boxes */}
             <div className="flex flex-col gap-10" ref={leftBox}>
                 {[...Array(8)].map((_, idx) => (

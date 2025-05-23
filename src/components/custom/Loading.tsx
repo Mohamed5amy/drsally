@@ -56,7 +56,7 @@ const Loading = () => {
             </div>
         </div>
         {/* Flowers */}
-        <div className="absolute left-20 bottom-0" data-aos="fade-up">
+        <div className="absolute hidden sm:flex left-20 bottom-0" data-aos="fade-up">
             <Image src={"/flower.svg"} alt="flower" height={400} width={200} />
         </div>
     </div>

@@ -4,7 +4,7 @@ import React from 'react'
 
 const BlogRow = () => {
   return (
-    <div className='bg-textPrimary rounded-3xl h-[250px] overflow-hidden flex items-center'>
+    <div className='bg-textPrimary rounded-3xl h-[250px] overflow-hidden hidden md:flex items-center'>
         <div className='min-w-[400px] h-full'>
             <Image src={"https://picsum.photos/1500"} alt='Blog Image' width={400} height={300} className='object-cover w-full h-full' />
         </div>

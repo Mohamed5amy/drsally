@@ -22,9 +22,9 @@ const Contact = () => {
     <div className='py-20 container'>
         <AnimatedTitle className='text-primaryText mb-2 text-[24px] md:text-[32px] lg:text-[56px] font-bold text-center'> Have a question? </AnimatedTitle>
         <p className='text-xl text-secondaryText text-center mb-10'>You can send your message here and I'll get back to you.</p>
-        <div className='flex items-center gap-16'>
+        <div className='flex flex-col md:flex-row items-center gap-16'>
             {/* Box */}
-            <div className='flex-[1.2]'>
+            <div className='flex-[1.2] w-full'>
                 <div className='p-6 bg-textPrimary rounded-3xl'>
                     <AnimatedTitle className='text-primaryText text-[24px] md:text-[32px] font-bold mb-10'> Send a message </AnimatedTitle>
                     {/* Name */}
@@ -62,7 +62,7 @@ const Contact = () => {
                 </div>
             </div>
             {/* Image */}
-            <div className='flex-1'>
+            <div className='flex-1 hidden lg:flex'>
                 <Magnetic strength={0.02}> <Image src={"/main1.svg"} alt="Dr Sally Image" width={650} height={600} /> </Magnetic>
             </div>
         </div>

@@ -7,7 +7,7 @@ const Header = ({label} : {label : string}) => {
   return (
     <div className="py-36 relative overflow-hidden">
         <div className='container'>
-            <AnimatedTitle className="text-[20px] md:text-[36px] xl:text-[56px] font-bold text-[#1C2C2D] mb-2 max-w-[1000px]">
+            <AnimatedTitle className="text-[36px] xl:text-[56px] font-bold text-[#1C2C2D] mb-2 max-w-[1000px]">
             {label} 
             </AnimatedTitle>
             {/* Breadcrumbs */}

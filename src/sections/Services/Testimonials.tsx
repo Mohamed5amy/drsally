@@ -11,7 +11,7 @@ const Testimonials = () => {
           <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'> Client Experiences </AnimatedTitle>
           <p className='text-lightText text-xl mb-8 text-center'>Hear from others who have worked with me on their journey toward healing and growth.</p>
           {/* Boxes */}
-          <div className="flex gap-10">
+          <div className="flex flex-col md:flex-row gap-10">
               {[...Array(2)].map((_, idx) => (
               <Magnetic strength={0.05} key={idx}>
                 <div
