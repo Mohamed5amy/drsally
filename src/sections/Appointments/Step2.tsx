@@ -2,6 +2,7 @@
 
 import NormalButton from '@/components/custom/NormalButton';
 import SimpleCard from '@/components/ui/SimpleCard';
+import { services } from '@/data/services';
 import { calenderIcon, clock } from '@/icons';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
@@ -19,15 +20,24 @@ const Step2 = () => {
     const handlePrev = () => {
         router.push('/appointments?step=1')
     }
+
+    // Get Service
+    const serviceId = JSON.parse(localStorage.getItem('service') || '0')
+    const service = services.find(item => item.id === serviceId)
     
     return (
         <div className='container' data-aos="fade-up">
             {/* Card */}
-            <SimpleCard />
+            <SimpleCard 
+                title={service?.title}
+                description={service?.description}
+                duration={service?.duration}
+                price={service?.price}
+            />
             {/* Time */}
             <div className='flex items-center justify-between mt-12 mb-6 flex-col md:flex-row'>
                 <h4 className='text-primaryText text-lg md:text-xl lg:text-2xl font-semibold'> Select Date & Time </h4>
-                <h4 className='text-secondaryText md:text-lg lg:text-xl font-semibold'> Time Zone:Eastern Time (GMT-04:00) </h4>
+                <h4 className='text-secondaryText md:text-lg lg:text-xl font-semibold'> Time Zone : Central European Time (CET) </h4>
             </div>
             <div className='p-5 bg-textPrimary rounded-3xl flex items-center gap-4 mb-14 flex-col md:flex-row'>
                 {/* Date Picker */}

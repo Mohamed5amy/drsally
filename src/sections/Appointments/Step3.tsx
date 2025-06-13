@@ -1,8 +1,40 @@
 "use client"
 
+import CustomCheckbox from '@/components/custom/CustomCheckbox';
 import NormalButton from '@/components/custom/NormalButton';
-import SimpleCard from '@/components/ui/SimpleCard';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+const checkboxOptions = [
+    'Healing',
+    'Self- Development',
+    'Depression',
+    'Anger Management',
+    'Feelings of Negativity',
+    'Anxiety / Stress',
+    'Exam Anxiety',
+    'Financial Worries',
+    'Panic Attacks',
+    'Stage Fright',
+    'Acute Shyness',
+    'Low Self-Esteem',
+    'Lack of Confidence',
+    'Relationship Issues',
+    'Weight Issues & Management / Body Image',
+    'Procrastination, Lack of Motivation / Energy',
+    'Chronic Insomnia',
+    'Nightmares',
+    'Chronic Pain / Bodily Discomfort',
+    'Sexual Issues',
+    'Feelings of Guilt',
+    'Addiction Issues',
+    'Smoking',
+    'Alcohol Abuse',
+    'Drug Abuse',
+    'Fears / Phobias',
+    'Unwanted Habits',
+    'Others',
+];
 
 const Step3 = () => {
 
@@ -14,100 +46,136 @@ const Step3 = () => {
     const handlePrev = () => {
         router.push('/appointments?step=2')
     }
+
+    const [therapy, setTherapy] = useState<boolean | null>(null)
+    const [hypnotized, setHypnotized] = useState<boolean | null>(null)
+    const [checked, setChecked] = useState<{[key: string]: boolean}>({});
     
     return (
         <div className='container' data-aos="fade-up">
-            {/* Card */}
-            <SimpleCard />
             {/* Time */}
-            <h4 className='text-primaryText text-lg md:text-xl lg:text-2xl font-semibold mt-12 mb-4'> Your Information </h4>
-            <div className='p-5 bg-textPrimary rounded-3xl grid grid-cols-1 md:grid-cols-2 gap-4 mb-8'>
-                {/* First Name */}
+            <h4 className='text-primaryText text-lg md:text-xl lg:text-2xl font-semibold mt-12 mb-4'> Tell Me About Yourself </h4>
+            {/* Text Form */}
+            <div className='p-5 bg-textPrimary rounded-3xl grid grid-cols-1 gap-4 mb-8'>
+                {/* Medical Conditions */}
                 <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
-                    <label htmlFor="fullName" className="md:text-xl font-bold">
-                    First Name
-                    </label>
-                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
-                        <input
-                            type="text"
-                            id="fullName"
-                            placeholder='Enter your first name'
-                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
-                        />
-                    </div>
-                </div>
-                {/* Last Name */}
-                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
-                    <label htmlFor="lastName" className="md:text-xl font-bold">
-                    Last Name
-                    </label>
-                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
-                        <input
-                            type="text"
-                            id="lastName"
-                            placeholder='Enter your last name'
-                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
-                        />
-                    </div>
-                </div>
-                {/* Phone */}
-                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
-                    <label htmlFor="phone" className="md:text-xl font-bold">
-                    Phone Number
-                    </label>
-                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
-                        <input
-                            type="text"
-                            id="phone"
-                            placeholder='Enter your phone number'
-                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
-                        />
-                    </div>
-                </div>
-                {/* Email */}
-                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
-                    <label htmlFor="email" className="md:text-xl font-bold">
-                    Email Number
-                    </label>
-                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
-                        <input
-                            type="text"
-                            id="email"
-                            placeholder='Enter your email address'
-                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div className='p-5 bg-textPrimary rounded-3xl grid grid-cols-1 gap-4 mb-14'>
-                {/* Have any question  */}
-                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
-                    <label htmlFor="question" className="md:text-xl font-bold">
-                    Questions
-                    </label>
-                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
-                        <input
-                            type="text"
-                            id="question"
-                            placeholder='Have any questions?'
-                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
-                        />
-                    </div>
-                </div>
-                {/* Note */}
-                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
-                    <label htmlFor="note" className="md:text-xl font-bold">
-                    Notes
+                    <label htmlFor="note" className="md:text-xl font-bold normal">
+                        Medical condition or challenges
                     </label>
                     <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
                         <textarea
                             id="note"
-                            placeholder='Any additional notes?'
+                            placeholder='Medical condition or challenges :'
                             rows={3}
                             className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                         />
                     </div>
                 </div>
+                {/* Personal Beliefs */}
+                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
+                    <label htmlFor="note" className="md:text-xl font-bold normal">
+                        What are your personal spiritual or religious beliefs
+                    </label>
+                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
+                        <textarea
+                            id="note"
+                            placeholder='What are your personal spiritual or religious beliefs ?'
+                            rows={3}
+                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+                        />
+                    </div>
+                </div>
+                {/* What you want to change */}
+                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
+                    <label htmlFor="note" className="md:text-xl font-bold normal">
+                    What do you want to change or improve most during your session
+                    </label>
+                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
+                        <textarea
+                            id="note"
+                            placeholder='What do you want to change or improve most during your session ?'
+                            rows={3}
+                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+                        />
+                    </div>
+                </div>
+            </div>
+            {/* Check Form */}
+            <div className='p-5 bg-textPrimary rounded-3xl grid grid-cols-1 gap-4 mb-8'>
+                {/* Physical Care */}
+                <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
+                    <p className='md:text-xl font-bold normal'>Are you currently under a physician's care?</p>
+                    <div className='flex gap-4'>
+                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16'> Yes </div>
+                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16'> No </div>
+                    </div>
+                </div>
+                {/* Medication */}
+                <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
+                    <p className='md:text-xl font-bold normal'>Are you currently on medication?</p>
+                    <div className='flex gap-4'>
+                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16'> Yes </div>
+                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16'> No </div>
+                    </div>
+                </div>
+                {/* Counseling */}
+                <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
+                    <p className='md:text-xl font-bold normal'>Have you been in therapy or counseling before? </p>
+                    <div className='flex gap-4'>
+                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16' onClick={() => setTherapy(true)}> Yes </div>
+                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16' onClick={() => setTherapy(false)}> No </div>
+                    </div>
+                </div>
+                {/* Reason */}
+                {therapy &&<div data-aos="fade-right" className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
+                    <label htmlFor="note" className="md:text-xl font-bold normal">
+                        For what reason
+                    </label>
+                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
+                        <textarea
+                            id="note"
+                            placeholder='For what reason ?'
+                            rows={3}
+                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+                        />
+                    </div>
+                </div>}
+                {/* Hypnotized */}
+                <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
+                    <p className='md:text-xl font-bold normal'>Have you ever been hypnotized before? </p>
+                    <div className='flex gap-4'>
+                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16' onClick={() => setHypnotized(true)}> Yes </div>
+                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16' onClick={() => setHypnotized(false)}> No </div>
+                    </div>
+                </div>
+                {/* Reason 2 */}
+                {hypnotized && <div data-aos="fade-right" className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
+                    <label htmlFor="note" className="md:text-xl font-bold normal">
+                        For what reason
+                    </label>
+                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
+                        <textarea
+                            id="note"
+                            placeholder='For what reason ?'
+                            rows={3}
+                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
+                        />
+                    </div>
+                </div>}
+            </div>
+            {/* Checkboxes */}
+            <p className='text-primaryText text-lg md:text-xl lg:text-2xl font-semibold mt-12 mb-4'>Please tick any of the following you wish to focus on.</p>
+            <div className='p-5 bg-textPrimary rounded-3xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8'>
+                {checkboxOptions.map(option => (
+                    <div key={option} className='flex items-center gap-2'>
+                        <CustomCheckbox
+                            id={option}
+                            label={option}
+                            checked={!!checked[option]}
+                            onChange={(val) => setChecked(prev => ({ ...prev, [option]: val }))}
+                        />
+                    </div>
+                ))}
             </div>
             {/* Buttons */}
             <div className='flex flex-col-reverse sm:flex-row justify-end gap-4'>

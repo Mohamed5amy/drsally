@@ -2,18 +2,28 @@
 
 import { clock, rightChevron2 } from '@/icons';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const Card: React.FC<ServiceCardProps> = ({
   title = "Example service",
   description = "Description of your service",
   duration = "1 hour",
-  imageUrl = "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80",
   onBookClick = () => console.log('Book service clicked'),
+  price = "150",
+  service = 0,
+  number = 0,
 }) => {
 
     const [active, setActive] = useState(false)
+
+    useEffect(() => {
+        if(service === number) {
+            setActive(true)
+        } else {
+            setActive(false)
+        }
+    }, [service, number])
 
   return (
     <div className='flex flex-1 items-center gap-2'>
@@ -38,30 +48,40 @@ const Card: React.FC<ServiceCardProps> = ({
 
                 {/* Service Content */}
                 <div className="flex-grow">
-                <h3 className="text-2xl font-semibold text-primaryText mb-3">
-                    {title}
-                </h3>
-                
-                <p className="text-primaryText mb-4 text-base">
-                    {description}
-                </p>
+                    <h3 className="text-2xl font-semibold text-primaryText mb-3">
+                        {title}
+                    </h3>
+                    
+                    <p className="text-primaryText mb-4 text-base">
+                        {description}
+                    </p>
 
-                {/* Duration */}
-                <div className="flex items-center text-secondary">
-                    {clock}
-                    <span className="text-base text-primaryText ml-2 font-medium">{duration}</span>
-                </div>
+                    {/* Duration & Price */}
+                    <div className="flex items-center gap-4">
+                        {/* Duration */}
+                        <div className="flex items-center text-secondary">
+                            {clock}
+                            <span className="text-base text-primaryText ml-2 font-medium">{duration}</span>
+                        </div>
+                        {/* Separator */}
+                        <div className="h-4 w-px bg-gray-200"></div>
+                        {/* Price */}
+                        <div className="flex items-center text-secondary">
+                            <span className='block text-xl'>$</span>
+                            <span className="text-base text-primaryText ml-2 font-medium">{price}</span>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Book Service Button */}
                 <div className="flex-shrink-0 w-full lg:w-auto">
                     {active ? <button
-                        onClick={() => setActive(!active)}
-                        className="px-20 py-4 border-2 border-primary rounded-full font-medium transition-all w-full relative group hover:px-24 bg-primary text-white">
+                        onClick={() => {setActive(!active); onBookClick()}}
+                        className="px-12 py-4 border-2 border-primary rounded-full font-medium transition-all w-full relative group hover:px-14 bg-primary text-white">
                         Unselect Service
                     </button> : <button
-                        onClick={() => setActive(!active)}
-                        className="px-20 py-4 bg-white border-2 border-primary text-primary rounded-full font-medium transition-all w-full relative group hover:px-24 hover:bg-primary hover:text-white">
+                        onClick={() => {setActive(!active); onBookClick()}}
+                        className="px-12 py-4 bg-white border-2 border-primary text-primary rounded-full font-medium transition-all w-full relative group hover:px-14 hover:bg-primary hover:text-white">
                         Select Service
                     </button>}
                 </div>
@@ -75,8 +95,10 @@ interface ServiceCardProps {
   title?: string;
   description?: string;
   duration?: string;
-  imageUrl?: string;
   onBookClick?: () => void;
+  price?: string;
+  service?: number;
+  number?: number;
 }
 
 export default Card;
