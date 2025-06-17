@@ -3,9 +3,15 @@
 import Image from "next/image"
 import Link from "next/link"
 import Button from "./Button"
-import { calenderIcon } from "@/icons"
+import { homeIcon } from "@/icons"
 import Menu from "./Menu"
 import { usePathname } from "next/navigation"
+import useAuthUser from "react-auth-kit/hooks/useAuthUser"
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated"
+import { ChevronDown, LogOut, User } from "lucide-react"
+import useSignOut from "react-auth-kit/hooks/useSignOut"
+import { ReactNode, useState } from "react"
+import { Package } from "lucide-react"
 
 const Nav = () => {
 
@@ -19,8 +25,9 @@ const Nav = () => {
   ]
 
   const pathname = usePathname()
-  console.log(pathname)
-  
+  const isAuth = useIsAuthenticated()
+  const user = useAuthUser() as {name : string}
+
   return (
     <div className="container flex items-center justify-between py-6 bg-bg">
       {/* Logo */}
@@ -41,10 +48,76 @@ const Nav = () => {
           })}
         </div>
         {/* Button */}
-        <div className="hidden xl:block"> <Button label="Book a session" icon={calenderIcon} /> </div>
+        {isAuth ? (
+          <Dropdown>
+            <div className="items-center gap-4 hidden md:flex">
+              <div className="text-primary font-bold text-lg w-12 h-12 flex items-center justify-center rounded-full bg-secondary text-white"> {user.name.split(" ").length > 1 ? user.name.split(" ")[0][0] + user.name.split(" ")[1][0] : user.name.split(" ")[0][0]} </div>
+              <div className="flex md:hidden xl:flex flex-col items-start gap-0">
+                <div className="text-secondaryText font-semibold">Welcome</div>
+                <div className="text-primary font-bold">{user.name.length > 12 ? user.name.split(" ")[0] : user.name}</div>
+              </div>
+              <ChevronDown className="w-4 h-4" />
+            </div>
+          </Dropdown>
+        ) : (
+          <Link href={"/login"} className="hidden md:block"> <Button label="Login" icon={homeIcon} /> </Link>
+        )}
       </div>
       {/* Menu */}
       <Menu list={list} />
+    </div>
+  )
+}
+
+const Dropdown = ({children} : {children : ReactNode}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const logout = useSignOut()
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+  
+  return (
+    <div className="relative">
+      {/* Dropdown Button */}
+      <button onClick={toggleDropdown}>
+        {children}
+      </button>
+
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border">
+          {/* Profile Option */}
+          <Link
+            onClick={() => setIsOpen(false)}
+            href="/profile"
+            className="flex items-center gap-3 px-4 py-2 text-sm text-secondaryText transition-all hover:bg-background cursor-pointer"
+          >
+            <User className="w-4 h-4" />
+            Profile
+          </Link>
+
+          {/* Items Option */}
+          <Link
+            onClick={() => setIsOpen(false)}
+            href="/appointments"
+            className="flex items-center gap-3 px-4 py-2 text-sm text-secondaryText transition-all hover:bg-background cursor-pointer"
+          >
+            <Package className="w-4 h-4" />
+            Appointments
+          </Link>
+
+          {/* Logout Option */}
+          <button
+            onClick={() => {setIsOpen(false) ; logout() ; window.location.reload()}}
+            className="flex items-center gap-3 px-4 py-2 w-full text-sm text-red-500 transition-all hover:bg-background cursor-pointer"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </button>
+        </div>
+      )}
     </div>
   )
 }

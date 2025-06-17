@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import CustomCursor from '@/components/CustomCursor';
 import Nav from '@/components/custom/Nav';
 import Footer from '@/components/custom/Footer';
+import AuthContextProvider from '@/providers/auth-providers';
 
 const publicSans = Public_Sans({
   subsets: ['latin'],
@@ -30,12 +31,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${publicSans.className} antialiased`}>
+      <AuthContextProvider>
         <Nav />
         <ClientAOS />
         <CustomCursor />
         {children}
         <ToastContainer position='bottom-right' />
         <Footer />
+      </AuthContextProvider>
       </body>
     </html>
   )

@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { useState, useRef } from "react";
 import MenuToggle, { MenuToggleRef } from "./MenuToggle";
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
+import useSignOut from "react-auth-kit/hooks/useSignOut";
 
 const Menu = ({ list }: { list: { name: string; link: string }[] }) => {
-  const date = new Date().getFullYear();
   const [active, setActive] = useState(false);
   const toggleRef = useRef<MenuToggleRef>(null);
 
@@ -13,6 +14,8 @@ const Menu = ({ list }: { list: { name: string; link: string }[] }) => {
     toggleRef.current?.close(); // trigger animation + close
   };
 
+  const isAuth = useIsAuthenticated()
+  const logout = useSignOut()
   return (
     <>
       <div className="flex lg:hidden">
@@ -26,12 +29,26 @@ const Menu = ({ list }: { list: { name: string; link: string }[] }) => {
               <p className="transition-colors hover:text-secondary">{item.name}</p>
             </Link>
           ))}
-          <p className="absolute hidden sm:flex text-[16px] font-normal text-textPlaceholder bottom-10 text-center" data-aos="fade-in" data-aos-delay={1000}>
+          {isAuth ? (
+            <>
+              <Link href={"/profile"} data-aos="fade-up" data-aos-delay={2200} onClick={handleClose}>
+                <p className="transition-colors hover:text-secondary">Profile</p>
+              </Link>
+              <div data-aos="fade-up" data-aos-delay={2200} onClick={() => {logout() ; window.location.reload()}  }>
+                <p className="transition-colors hover:text-secondary">Logout</p>
+              </div>
+            </>
+          ) : (
+            <Link href={"/login"} data-aos="fade-up" data-aos-delay={2200} onClick={handleClose}>
+              <p className="transition-colors hover:text-secondary">Login</p>
+            </Link>
+          )}
+          {/* <p className="absolute hidden sm:flex text-[16px] font-normal text-textPlaceholder bottom-10 text-center">
             © {date} All Rights Reserved | Powered by{" "}
             <strong>
               <a href="https://www.mssmsolutions.com/" rel="noreferrer" target="_blank" className="transition-colors hover:text-secondary">MSSM</a>
             </strong> Solutions
-          </p>
+          </p> */}
         </div>
       )}
     </>
