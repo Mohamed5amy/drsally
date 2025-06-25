@@ -2,8 +2,9 @@
 
 import CustomCheckbox from '@/components/custom/CustomCheckbox';
 import NormalButton from '@/components/custom/NormalButton';
+import { useAppointmentStore } from '@/store/useAppointmentStore';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const checkboxOptions = [
     'Healing',
@@ -39,17 +40,20 @@ const checkboxOptions = [
 const Step3 = () => {
 
     const router = useRouter()
+    const {data , setData} = useAppointmentStore()
+
+    const condition = !data.WhatToChange || !data.counseling || !data.hypnotized || !data.medicalConditions || !data.medication || !data.personalBeliefs || !data.physicalCare || (data.hypnotized && !data.hyponatizedReason) || (data.counseling && !data.counselingReason) || data.focus?.length === 0
 
     const handleNext = () => {
-        router.push('/appointments?step=4')
+        if (condition) {
+            toast.error("Please make sure to fill the whole form")
+        } else {
+            router.push('/appointments?step=4')
+        }
     }
     const handlePrev = () => {
         router.push('/appointments?step=2')
     }
-
-    const [therapy, setTherapy] = useState<boolean | null>(null)
-    const [hypnotized, setHypnotized] = useState<boolean | null>(null)
-    const [checked, setChecked] = useState<{[key: string]: boolean}>({});
     
     return (
         <div className='container' data-aos="fade-up">
@@ -67,6 +71,8 @@ const Step3 = () => {
                             id="note"
                             placeholder='Medical condition or challenges :'
                             rows={3}
+                            value={data.medicalConditions || ''}
+                            onChange={(e) => setData({medicalConditions: e.target.value})}
                             className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                         />
                     </div>
@@ -81,6 +87,8 @@ const Step3 = () => {
                             id="note"
                             placeholder='What are your personal spiritual or religious beliefs ?'
                             rows={3}
+                            value={data.personalBeliefs || ''}
+                            onChange={(e) => setData({personalBeliefs: e.target.value})}
                             className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                         />
                     </div>
@@ -95,6 +103,8 @@ const Step3 = () => {
                             id="note"
                             placeholder='What do you want to change or improve most during your session ?'
                             rows={3}
+                            value={data.WhatToChange || ''}
+                            onChange={(e) => setData({WhatToChange: e.target.value})}
                             className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                         />
                     </div>
@@ -106,28 +116,28 @@ const Step3 = () => {
                 <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
                     <p className='md:text-xl font-bold normal'>Are you currently under a physician's care?</p>
                     <div className='flex gap-4'>
-                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16'> Yes </div>
-                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16'> No </div>
+                        <div className={`px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16 ${data.physicalCare === "yes" && "yesActive"}`} onClick={() => setData({physicalCare : "yes"})}> Yes </div>
+                        <div className={`px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16 ${data.physicalCare === "no" && "noActive"}`} onClick={() => setData({physicalCare : "no"})}> No </div>
                     </div>
                 </div>
                 {/* Medication */}
                 <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
                     <p className='md:text-xl font-bold normal'>Are you currently on medication?</p>
                     <div className='flex gap-4'>
-                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16'> Yes </div>
-                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16'> No </div>
+                        <div className={`px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16 ${data.medication === "yes" && "yesActive"}`} onClick={() => setData({medication : "yes"})}> Yes </div>
+                        <div className={`px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16 ${data.medication === "no" && "noActive"}`} onClick={() => setData({medication : "no"})}> No </div>
                     </div>
                 </div>
                 {/* Counseling */}
                 <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
                     <p className='md:text-xl font-bold normal'>Have you been in therapy or counseling before? </p>
                     <div className='flex gap-4'>
-                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16' onClick={() => setTherapy(true)}> Yes </div>
-                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16' onClick={() => setTherapy(false)}> No </div>
+                        <div className={`px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16 ${data.counseling === "yes" && "yesActive"}`} onClick={() => setData({counseling : "yes"})}> Yes </div>
+                        <div className={`px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16 ${data.counseling === "no" && "noActive"}`} onClick={() => setData({counseling : "no"})}> No </div>
                     </div>
                 </div>
                 {/* Reason */}
-                {therapy &&<div data-aos="fade-right" className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
+                {data.counseling === "yes" &&<div data-aos="fade-right" className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
                     <label htmlFor="note" className="md:text-xl font-bold normal">
                         For what reason
                     </label>
@@ -136,6 +146,8 @@ const Step3 = () => {
                             id="note"
                             placeholder='For what reason ?'
                             rows={3}
+                            value={data.counselingReason || ''}
+                            onChange={(e) => setData({counselingReason: e.target.value})}
                             className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                         />
                     </div>
@@ -144,12 +156,12 @@ const Step3 = () => {
                 <div className='flex items-start md:items-center justify-between flex-col md:flex-row gap-2'>
                     <p className='md:text-xl font-bold normal'>Have you ever been hypnotized before? </p>
                     <div className='flex gap-4'>
-                        <div className='px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16' onClick={() => setHypnotized(true)}> Yes </div>
-                        <div className='px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16' onClick={() => setHypnotized(false)}> No </div>
+                        <div className={`px-12 py-2 rounded border border-primary text-primary transition-all hover:bg-primary hover:text-white hover:px-16 ${data.hypnotized === "yes" && "yesActive"}`} onClick={() => setData({hypnotized : "yes"})}> Yes </div>
+                        <div className={`px-12 py-2 rounded border border-red-500 text-red-500 transition-all hover:bg-red-500 hover:text-white hover:px-16 ${data.hypnotized === "no" && "noActive"}`} onClick={() => setData({hypnotized : "no"})}> No </div>
                     </div>
                 </div>
                 {/* Reason 2 */}
-                {hypnotized && <div data-aos="fade-right" className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
+                {data.hypnotized === "yes" && <div data-aos="fade-right" className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
                     <label htmlFor="note" className="md:text-xl font-bold normal">
                         For what reason
                     </label>
@@ -158,6 +170,8 @@ const Step3 = () => {
                             id="note"
                             placeholder='For what reason ?'
                             rows={3}
+                            value={data.hyponatizedReason || ''}
+                            onChange={(e) => setData({hyponatizedReason: e.target.value})}
                             className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                         />
                     </div>
@@ -171,8 +185,13 @@ const Step3 = () => {
                         <CustomCheckbox
                             id={option}
                             label={option}
-                            checked={!!checked[option]}
-                            onChange={(val) => setChecked(prev => ({ ...prev, [option]: val }))}
+                            checked={data.focus?.includes(option) || false}
+                            onChange={
+                                (val) => {
+                                    val ? setData({focus : [...(data.focus || []), option]}) :
+                                    setData({focus : data.focus?.filter(item => item !== option)})
+                                }
+                            }
                         />
                     </div>
                 ))}

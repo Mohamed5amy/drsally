@@ -29,3 +29,13 @@ html {
     @apply bg-bg text-primaryText;
   }
 }
+
+/* Green Button */
+.yesActive {
+  @apply bg-primary text-white px-16;
+}
+
+/* Red Button */
+.noActive {
+  @apply bg-red-500 text-white px-16;
+}

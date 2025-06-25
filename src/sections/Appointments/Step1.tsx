@@ -3,6 +3,7 @@
 import NormalButton from '@/components/custom/NormalButton';
 import Card from '@/components/ui/Card';
 import { services } from '@/data/services';
+import { useAppointmentStore } from '@/store/useAppointmentStore';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -10,13 +11,12 @@ import { toast } from 'react-toastify';
 const Step1 = () => {
 
     const router = useRouter()
-    const [service, setService] = useState(0)
+    const {data , setData} = useAppointmentStore()
 
     const handleNext = () => {
-        if(service === 0) {
+        if(data.service === 0) {
             toast.error('Please select a service')
         } else {
-            localStorage.setItem('service', JSON.stringify(service))
             router.push('/appointments?step=2')
         }
     }
@@ -29,9 +29,9 @@ const Step1 = () => {
                         key={item.id}
                         title={item.title}
                         description={item.description}
-                        service={service}
+                        service={data.service}
                         number={item.id}
-                        onBookClick={() => setService(item.id)}
+                        onBookClick={() => {item.id === data.service ? setData({service: 0}) : setData({service: item.id})}}
                         duration={item.duration}
                         price={item.price}
                     />

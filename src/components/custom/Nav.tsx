@@ -51,7 +51,7 @@ const Nav = () => {
         {isAuth ? (
           <Dropdown>
             <div className="items-center gap-4 hidden md:flex">
-              <div className="text-primary font-bold text-lg w-12 h-12 flex items-center justify-center rounded-full bg-secondary text-white"> {user.name.split(" ").length > 1 ? user.name.split(" ")[0][0] + user.name.split(" ")[1][0] : user.name.split(" ")[0][0]} </div>
+              <div className="text-primary font-bold capitalize text-lg w-12 h-12 flex items-center justify-center rounded-full bg-secondary text-white"> {user.name.split(" ").length > 1 ? user.name.split(" ")[0][0] + user.name.split(" ")[1][0] : user.name.split(" ")[0][0]} </div>
               <div className="flex md:hidden xl:flex flex-col items-start gap-0">
                 <div className="text-secondaryText font-semibold">Welcome</div>
                 <div className="text-primary font-bold">{user.name.length > 12 ? user.name.split(" ")[0] : user.name}</div>
@@ -101,7 +101,7 @@ const Dropdown = ({children} : {children : ReactNode}) => {
           {/* Items Option */}
           <Link
             onClick={() => setIsOpen(false)}
-            href="/appointments"
+            href="/profile/appointments"
             className="flex items-center gap-3 px-4 py-2 text-sm text-secondaryText transition-all hover:bg-background cursor-pointer"
           >
             <Package className="w-4 h-4" />

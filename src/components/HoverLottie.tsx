@@ -1,11 +1,11 @@
 "use client"
 
 // HoverLottie.tsx
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Lottie from "lottie-react";
 
-const HoverLottie = ({icon , w , h}) => {
-  const lottieRef = useRef(null);
+const HoverLottie = ({icon , w , h , play} : {icon : {} , w : number , h : number , play ? : boolean }) => {
+  const lottieRef : any = useRef(null);
 
   const handleMouseEnter = () => {
     lottieRef.current?.play();
@@ -14,6 +14,14 @@ const HoverLottie = ({icon , w , h}) => {
   const handleMouseLeave = () => {
     lottieRef.current?.stop();
   };
+
+  useEffect(() => {
+    if (play) {
+      lottieRef.current?.play();
+    } else {
+      lottieRef.current?.stop();
+    }
+  } , [play])
 
   return (
     <div

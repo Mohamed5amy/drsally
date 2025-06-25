@@ -19,12 +19,11 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
 }) => {
     return (
         <div className={`flex items-center ${className}`}>
-            <div className="relative">
+            <div className="relative" onClick={() => onChange(!checked)}>
                 <input
                     type="checkbox"
                     id={id}
                     checked={checked}
-                    onChange={(e) => onChange(e.target.checked)}
                     disabled={disabled}
                     className="peer sr-only"
                 />
@@ -43,7 +42,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
                 `}>
                     {checked && (
                         <svg
-                            className="h-4 w-4 text-white m-auto mt-0.5"
+                            className="h-4 w-4 text-white m-auto"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
