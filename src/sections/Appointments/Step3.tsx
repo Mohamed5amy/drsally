@@ -1,9 +1,13 @@
 "use client"
 
+import { bookRequest, questionsRequest } from '@/APIs/appointments';
 import CustomCheckbox from '@/components/custom/CustomCheckbox';
 import NormalButton from '@/components/custom/NormalButton';
+import { services } from '@/data/services';
 import { useAppointmentStore } from '@/store/useAppointmentStore';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { toast } from 'react-toastify';
 
 const checkboxOptions = [
@@ -37,18 +41,96 @@ const checkboxOptions = [
     'Others',
 ];
 
+function getThirtyMinuteIntervals(slot: string) {
+    const [start, end] = slot.split("-");
+    const intervals = [];
+    let [startHour, startMinute] = start.split(":").map(Number);
+    let [endHour, endMinute] = end.split(":").map(Number);
+  
+    let current = new Date();
+    current.setHours(startHour, startMinute, 0, 0);
+  
+    const endTime = new Date();
+    endTime.setHours(endHour, endMinute, 0, 0);
+  
+    while (current < endTime) {
+      const next = new Date(current.getTime() + 30 * 60000);
+      intervals.push({
+        start_time: current.toTimeString().slice(0, 5),
+        end_time: next <= endTime ? next.toTimeString().slice(0, 5) : end.toString(),
+      });
+      current = next;
+    }
+    return intervals;
+}
+
 const Step3 = () => {
 
     const router = useRouter()
-    const {data , setData} = useAppointmentStore()
+    const {data , setData } = useAppointmentStore()
+    const [loading, setLoading] = useState(false)
 
-    const condition = !data.WhatToChange || !data.counseling || !data.hypnotized || !data.medicalConditions || !data.medication || !data.personalBeliefs || !data.physicalCare || (data.hypnotized && !data.hyponatizedReason) || (data.counseling && !data.counselingReason) || data.focus?.length === 0
+    const user : {token : string} | null = useAuthUser()
+
+    const service = services.find(item => item.id === data.service)
+
+    const condition = !data.WhatToChange || !data.counseling || !data.hypnotized || !data.medicalConditions || !data.medication || !data.personalBeliefs || !data.physicalCare || (data.hypnotized === "yes" && !data.hyponatizedReason) || (data.counseling === "yes" && !data.counselingReason) || data.focus?.length === 0
+
+    const handleSubmitUserData = async () => {
+        const newData = {
+            question1 : data.medicalConditions,
+            question2 : data.personalBeliefs,
+            question3 : data.WhatToChange,
+            question4 : data.physicalCare,
+            question5 : data.medication,
+            question6 : data.counseling,
+            question7 : data.counselingReason || "No reason",
+            question8 : data.hypnotized,
+            question9 : data.hyponatizedReason || "No reason",
+            question10 : data.focus,
+        }
+        try {
+            const res = await questionsRequest(user?.token || "" , newData)
+            if (res) {
+                router.push('/appointments?step=4')
+            } else {
+                toast.error("Something went wrong please try again");
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error("Something went wrong please try again");
+        }
+    }
+
+    const handleSubmit = async () => {
+        const newData = {
+            booking_date : data?.day,
+            type : service?.title,
+            booking_times : getThirtyMinuteIntervals(data.slots || ""),
+            price : service?.price
+        }
+        setLoading(true)
+        try {
+            const res = await bookRequest(user?.token || "" , newData)
+            if (res) {
+                console.log("Booking Success" , res)
+                handleSubmitUserData()
+            } else {
+                toast.error("Something went wrong please try again");
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error("Something went wrong please try again");
+        } finally {
+            setLoading(false)
+        }
+    }
 
     const handleNext = () => {
         if (condition) {
             toast.error("Please make sure to fill the whole form")
         } else {
-            router.push('/appointments?step=4')
+            handleSubmit()
         }
     }
     const handlePrev = () => {
@@ -198,8 +280,8 @@ const Step3 = () => {
             </div>
             {/* Buttons */}
             <div className='flex flex-col-reverse sm:flex-row justify-end gap-4'>
-                <NormalButton onClick={handlePrev} label='Back' styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' />
-                <NormalButton onClick={handleNext} label='Next' styles='px-20 hover:px-24' />
+                <NormalButton onClick={handlePrev} label='Back' styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' loading={loading} />
+                <NormalButton onClick={handleNext} label='Next' styles='px-20 hover:px-24' loading={loading} />
             </div>
         </div>
     )

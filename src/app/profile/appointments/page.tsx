@@ -1,15 +1,15 @@
-import React from 'react'
-import MyProfile from '@/sections/Profile/MyProfile'
-import { cookies } from 'next/headers'
 import { getProfileData } from '@/APIs/user'
-import Sidebar from '@/components/custom/Sidebar'
 import MyAppointments from '@/sections/Profile/MyAppointments'
+import { cookies } from 'next/headers'
 
 const page = async () => {
+
+  const token = (await cookies()).get("_auth")?.value
+  const profile = await getProfileData(token || "")
     
   return (
     <div className='container'>
-      <MyAppointments />
+      <MyAppointments bookings={profile.bookings} />
     </div>
     
   )

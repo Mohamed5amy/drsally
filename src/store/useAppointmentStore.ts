@@ -25,6 +25,7 @@ interface FormData {
   focus: string[];
   // Day & Time
   day : string;
+  slots : string;
 }
 
 interface AppointmentStore {

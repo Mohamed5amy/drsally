@@ -4,20 +4,30 @@ import NormalButton from '@/components/custom/NormalButton';
 import Card from '@/components/ui/Card';
 import { services } from '@/data/services';
 import { useAppointmentStore } from '@/store/useAppointmentStore';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 import { toast } from 'react-toastify';
 
 const Step1 = () => {
 
     const router = useRouter()
     const {data , setData} = useAppointmentStore()
-
+    const isAuth = useIsAuthenticated()
+    const pathname = usePathname()
+    console.log(pathname) 
+    
     const handleNext = () => {
         if(data.service === 0) {
             toast.error('Please select a service')
         } else {
-            router.push('/appointments?step=2')
+            if (isAuth) {
+                router.push('/appointments?step=2')
+            } else {
+                toast("Kindly Login First")
+                localStorage.setItem("url", pathname)
+                router.push("/login")
+            }
         }
     }
     

@@ -18,6 +18,9 @@ const LoginForm = () => {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
+  // Remove top-level localStorage usage
+  // const url = localStorage.getItem("url")
+
   // Login Function 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +50,18 @@ const LoginForm = () => {
         
         if (isSignIn) {
           toast.success("Welcome " + response.data.data.user.name);
-          router.push("/");
+          // Move localStorage access here
+          if (typeof window !== "undefined") {
+            const url = localStorage.getItem("url");
+            if (url) {
+              router.push(url)
+              localStorage.removeItem("url")
+            } else {
+              router.push("/")
+            }
+          } else {
+            router.push("/")
+          }
         } else {
           toast.error("Something went wrong");
         }
@@ -79,7 +93,19 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    isAuth && router.push("/")
+    if (isAuth) {
+      if (typeof window !== "undefined") {
+        const url = localStorage.getItem("url");
+        if (url) {
+          router.push(url)
+          localStorage.removeItem("url")
+        } else {
+          router.push("/")
+        }
+      } else {
+        router.push("/")
+      }
+    }
   } , [isAuth])
   
   return (

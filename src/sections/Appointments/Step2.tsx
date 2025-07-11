@@ -6,19 +6,83 @@ import SimpleCard from '@/components/ui/SimpleCard';
 import { services } from '@/data/services';
 import { calenderIcon, clock } from '@/icons';
 import { useRouter } from 'next/navigation';
-import { useRef } from 'react';
 import { format } from "date-fns";
 import { useAppointmentStore } from '@/store/useAppointmentStore';
-import { get } from 'http';
+import { useEffect, useState } from 'react';
+import { bookRequest, getSlots } from '@/APIs/appointments';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import { toast } from 'react-toastify';
 
 
-const Step2 = () => {
+// Helper to convert "14:00" to a Date object (today's date)
+function timeStringToDate(timeStr: string) {
+  const [hours, minutes] = timeStr.split(":").map(Number);
+  const date = new Date();
+  date.setHours(hours, minutes, 0, 0);
+  return date;
+}
+
+function getThirtyMinuteIntervals(slot: string) {
+    const [start, end] = slot.split("-");
+    const intervals = [];
+    let [startHour, startMinute] = start.split(":").map(Number);
+    let [endHour, endMinute] = end.split(":").map(Number);
+  
+    let current = new Date();
+    current.setHours(startHour, startMinute, 0, 0);
+  
+    const endTime = new Date();
+    endTime.setHours(endHour, endMinute, 0, 0);
+  
+    while (current < endTime) {
+      const next = new Date(current.getTime() + 30 * 60000);
+      intervals.push({
+        start_time: current.toTimeString().slice(0, 5),
+        end_time: next <= endTime ? next.toTimeString().slice(0, 5) : end.toString(),
+      });
+      current = next;
+    }
+    return intervals;
+}
+
+const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
 
     const {data , setData} = useAppointmentStore()
     const router = useRouter()
 
+    const user : {token : string} | null = useAuthUser()
+
+    const [loading, setLoading] = useState(false)
+
+    const handleSubmit = async () => {
+        const newData = {
+            booking_date : data?.day,
+            type : service?.title,
+            booking_times : getThirtyMinuteIntervals(data.slots || ""),
+            price : service?.price
+        }
+        setLoading(true)
+        try {
+            const res = await bookRequest(user?.token || "" , newData)
+            if (res) {
+                router.push('/appointments?step=4')
+            } else {
+                toast.error("Something went wrong please try again");
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error("Something went wrong please try again");
+        } finally {
+            setLoading(false)
+        }
+    }
+
     const handleNext = () => {
-        router.push('/appointments?step=3')
+        if (bookings === 0) {
+            router.push('/appointments?step=3')
+        } else {
+            handleSubmit()
+        }
     }
     const handlePrev = () => {
         router.push('/appointments?step=1')
@@ -27,34 +91,22 @@ const Step2 = () => {
     // Get Service
     const service = services.find(item => item.id === data.service)
 
-    // Days
-    const myDays = ["2025-06-21" , "2025-06-29"];
-    const times : {start : string , end : string}[] = [{start : "10:00", end: "11:00"}, {start: "11:00", end: "12:00"}, {start: "12:00", end: "13:00"}];
-
-    // Get Next Week Date
-    function getNextWeekDate(dateString?: string): string {
-        const date = dateString ? new Date(dateString) : new Date();
-        date.setDate(date.getDate() + 7);
-        return date.toISOString().split('T')[0]; // format: YYYY-MM-DD
-    }
-    
-    // Get Next Month Date
-    function getNextMonthDate(dateString?: string): string {
-        const date = dateString ? new Date(dateString) : new Date();
-        const currentDay = date.getDate();
-
-        // Move to next month
-        date.setMonth(date.getMonth() + 1);
-
-        // Handle cases where next month has fewer days
-        // (e.g., Jan 31 → Feb 28/29)
-        if (date.getDate() < currentDay) {
-            // date auto-adjusted to last day of month
+    // Get Times
+    const [slots, setSlots] = useState<{start : string , end : string}[]>([])
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const res = await getSlots(data?.day?.toString() || "" , service?.duration?.slice(0 , 2) || "" , user?.token || "")
+                setSlots(res[0])
+            } catch (err) {
+                console.log(err)
+                toast.error("Ops something went wrong")
+            }
         }
 
-        return date.toISOString().split('T')[0]; // format: YYYY-MM-DD
-    }
-    
+        data.day && getData()
+    } , [data.day])
+
     return (
         <div className='container' data-aos="fade-up">
             {/* Card */}
@@ -81,7 +133,7 @@ const Step2 = () => {
                             <span className='absolute left-3 text-primary'> {calenderIcon} </span>
                         </SelectTrigger>
                         <SelectContent className='bg-white'>
-                            {myDays.map((day, index) => (
+                            {days.map((day, index) => (
                                 <SelectItem key={index} value={day} className='transition-colors hover:bg-bg'>
                                     {format(day , "EEE, d MMM  yyyy")}
                                 </SelectItem>
@@ -94,15 +146,15 @@ const Step2 = () => {
                     <label htmlFor="date" className="md:text-xl font-bold">
                     Select Slot
                     </label>
-                    <Select disabled={!data.day}>
+                    <Select value={data.slots} onValueChange={value => setData({slots : value})} disabled={!data.day}>
                         <SelectTrigger className='p-3 h-12 font-semibold ps-11 rounded-xl bg-bg border border-[#C8DCD7] relative'>
                             <SelectValue placeholder="Available Slots" />
                             <span className='absolute left-3 text-primary'> {clock} </span>
                         </SelectTrigger>
                         <SelectContent className='bg-white'>
-                            {times.length > 0 ? times.map((day, index) => (
-                                <SelectItem key={index} value={day.start} className='transition-colors hover:bg-bg'>
-                                    {day.start} - {day.end}
+                            {slots.length > 0 ? slots.map((day, index) => (
+                                <SelectItem key={index} value={day.start + "-" + day.end} className='transition-colors hover:bg-bg'>
+                                    {format(timeStringToDate(day.start), "h:mm a")} - {format(timeStringToDate(day.end), "h:mm a")}
                                 </SelectItem>
                             )) : <p className='p-4 font-semibold'> Sorry, Saly has no available slots in that day, Kindly try another day. </p> }
                         </SelectContent>
@@ -111,8 +163,8 @@ const Step2 = () => {
             </div>
             {/* Buttons */}
             <div className='flex justify-end gap-4 flex-col-reverse sm:flex-row'>
-                <NormalButton onClick={handlePrev} label='Back' styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' />
-                <NormalButton onClick={handleNext} label='Next' styles='px-20 hover:px-24' />
+                <NormalButton onClick={handlePrev} loading={loading} label='Back' styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' />
+                <NormalButton onClick={handleNext} loading={loading} label='Next' styles='px-20 hover:px-24' />
             </div>
         </div>
     )

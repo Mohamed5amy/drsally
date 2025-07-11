@@ -105,7 +105,7 @@ const Dropdown = ({children} : {children : ReactNode}) => {
             className="flex items-center gap-3 px-4 py-2 text-sm text-secondaryText transition-all hover:bg-background cursor-pointer"
           >
             <Package className="w-4 h-4" />
-            Appointments
+            My Appointments
           </Link>
 
           {/* Logout Option */}
