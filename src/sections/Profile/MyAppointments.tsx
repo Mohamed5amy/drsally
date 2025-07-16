@@ -183,8 +183,6 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap flex gap-2">
-                    <button onClick={() => handlePopup(reservation.id.toString())} className='text-sm font-semibold underline text-red-500'>Cancel</button>
-                    |
                     <button className='text-sm font-semibold underline text-primary'>Reschedule</button>
                   </td>
                 </tr>

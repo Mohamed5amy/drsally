@@ -8,6 +8,7 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser"
 import { services } from "@/data/services"
 import { format } from "date-fns"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 function timeStringToDate(timeStr: string) {
     const [hours, minutes] = timeStr.split(":").map(Number);
@@ -23,6 +24,12 @@ const Step4 = () => {
     const user : {name : string} | null = useAuthUser()
 
     const service = services.find(item => item.id === data.service)
+
+    const router = useRouter()
+
+    const handleClick = () => {
+        router.push("/profile/appointments")
+    }
     
   return (
     <div data-aos="fade-up">
@@ -40,9 +47,7 @@ const Step4 = () => {
             {/* Wednesday, April 30th, 2025 */}
             <div className="flex gap-4 w-full flex-col sm:flex-row">
                 <button className="rounded-full py-4 flex-1 text-primary border border-primary font-semibold transition-all hover:bg-teal-400/20"> Reschedule </button>
-                <Link href={"/profile/appointments"} onClick={() => resetData()} className="flex-1">
-                    <button className="rounded-full w-full py-4 text-secondaryText border border-secondaryText font-semibold transition-all hover:bg-gray-400/20"> My Appointments </button>
-                </Link>
+                <button className="rounded-full flex-1 py-4 text-secondaryText border border-secondaryText font-semibold transition-all hover:bg-gray-400/20" onClick={handleClick}> My Appointments </button>
             </div>
         </div>
     </div>

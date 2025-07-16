@@ -19,7 +19,7 @@ const EmailVerification = () => {
     e.preventDefault();
     // Check if the field is filled 
     if (!code) {
-      toast.error("Please fill all fields");
+      toast.error("Please fill in the code");
       return;
     }
     setLoading(true);
@@ -51,6 +51,7 @@ const EmailVerification = () => {
         <div className="flex flex-col gap-3 mb-6">
             <label htmlFor="code">Code</label>
             <input value={code} onChange={e => setCode(e.target.value)} type="text" id="code" placeholder="Code" className="p-4 focus:border-primary gradiantInput rounded-md border border-[#676767]" onKeyDown={e => e.key === 'Enter' && handleEmailVerification(e)} />
+            <p className="opacity-70 text-sm">Check your email : {localStorage?.getItem("email")}</p>
         </div>
         {/* Button */}
         <div onClick={e => handleEmailVerification(e)}>

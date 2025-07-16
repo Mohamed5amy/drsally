@@ -74,12 +74,12 @@ const Step3 = () => {
 
     const service = services.find(item => item.id === data.service)
 
-    const condition = !data.WhatToChange || !data.counseling || !data.hypnotized || !data.medicalConditions || !data.medication || !data.personalBeliefs || !data.physicalCare || (data.hypnotized === "yes" && !data.hyponatizedReason) || (data.counseling === "yes" && !data.counselingReason) || data.focus?.length === 0
+    const condition = !data.WhatToChange || !data.counseling || !data.hypnotized || !data.medicalConditions || !data.medication || !data.physicalCare || (data.hypnotized === "yes" && !data.hyponatizedReason) || (data.counseling === "yes" && !data.counselingReason) || data.focus?.length === 0
 
     const handleSubmitUserData = async () => {
         const newData = {
             question1 : data.medicalConditions,
-            question2 : data.personalBeliefs,
+            question2 : "not wanted",
             question3 : data.WhatToChange,
             question4 : data.physicalCare,
             question5 : data.medication,
@@ -155,22 +155,6 @@ const Step3 = () => {
                             rows={3}
                             value={data.medicalConditions || ''}
                             onChange={(e) => setData({medicalConditions: e.target.value})}
-                            className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
-                        />
-                    </div>
-                </div>
-                {/* Personal Beliefs */}
-                <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
-                    <label htmlFor="note" className="md:text-xl font-bold normal">
-                        What are your personal spiritual or religious beliefs
-                    </label>
-                    <div className="p-3 rounded-xl bg-bg border border-[#C8DCD7] relative">
-                        <textarea
-                            id="note"
-                            placeholder='What are your personal spiritual or religious beliefs ?'
-                            rows={3}
-                            value={data.personalBeliefs || ''}
-                            onChange={(e) => setData({personalBeliefs: e.target.value})}
                             className="w-full bg-transparent outline-none appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                         />
                     </div>

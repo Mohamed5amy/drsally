@@ -77,7 +77,7 @@ export const RegisterRequest = async (name : string , email : string , password 
 // Forget Password
 export const ForgetPasswordRequest = async (email : string) => {
   try {
-    const response = await axiosInstance.post("/auth/forgot-password", { email });
+    const response = await axiosInstance.post("/forget-password", { email });
     if (response.status == 200) {
       return response.data;
     } else {
@@ -90,9 +90,9 @@ export const ForgetPasswordRequest = async (email : string) => {
 };
 
 // Reset Password
-export const ResetPasswordRequest = async (password : string , code : string) => {
+export const ResetPasswordRequest = async (password : string , random_key : string) => {
   try {
-    const response = await axiosInstance.post("/auth/reset-password", { password , passwordConfirmation : password , code });
+    const response = await axiosInstance.post("/change-password", { password , random_key });
     if (response.status == 200) {
       return response.data;
     } else {

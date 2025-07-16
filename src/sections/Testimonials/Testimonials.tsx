@@ -2,6 +2,7 @@
 
 import AnimatedTitle from "@/components/AnimatedTitle";
 import Magnetic from "@/components/Magnetic";
+import { testimonials } from "@/data/testimonials";
 import { quotation } from "@/icons"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -61,8 +62,8 @@ const Testimonials = () => {
           {/* 2 Cols */}
           <div className="flex flex-col md:flex-row gap-10">
             {/* Boxes */}
-            <div className="flex flex-col gap-10" ref={leftBox}>
-                {[...Array(8)].map((_, idx) => (
+            <div className="flex flex-col gap-10 flex-1" ref={leftBox}>
+                {testimonials.slice(0 , Math.floor(testimonials.length / 2) + 1).map((test, idx) => (
                 <Magnetic strength={0.03} key={idx}>
                   <div
                       key={idx}
@@ -70,17 +71,17 @@ const Testimonials = () => {
                   >
                       <div className="absolute top-4 left-3"> {quotation} </div>
                       <p className="text-lg mb-2">
-                      “Working with Sally has been a transformational experience. I learn tools to better manage periods of anxiety and mental fatigue. Every session I feel at ease to share and work through concerns that are big and small. At times where I’ve had to make tough decisions, speaking through the situation.
+                      {test.comment}
                       </p>
-                      <h4 className="text-2xl font-semibold text-secondaryText">— HV</h4>
+                      <h4 className="text-2xl font-semibold text-secondaryText">— {test.name}</h4>
                       <div className="absolute bottom-4 right-3 rotate-180"> {quotation} </div>
                   </div>
                 </Magnetic>
                 ))}
             </div>
             {/* Boxes */}
-            <div className="flex flex-col gap-10" ref={rightBox}>
-                {[...Array(8)].map((_, idx) => (
+            <div className="flex flex-col gap-10 flex-1" ref={rightBox}>
+                {testimonials.slice(Math.floor(testimonials.length / 2) - 1 , testimonials.length - 1).map((test, idx) => (
                 <Magnetic strength={0.03} key={idx}>
                   <div
                       key={idx}
@@ -88,9 +89,9 @@ const Testimonials = () => {
                   >
                       <div className="absolute top-4 left-3"> {quotation} </div>
                       <p className="text-lg mb-2">
-                      “Working with Sally has been a transformational experience. I learn tools to better manage periods of anxiety and mental fatigue. Every session I feel at ease to share and work through concerns that are big and small. At times where I’ve had to make tough decisions, speaking through the situation.
+                      {test.comment}
                       </p>
-                      <h4 className="text-2xl font-semibold text-secondaryText">— HV</h4>
+                      <h4 className="text-2xl font-semibold text-secondaryText">— {test.name}</h4>
                       <div className="absolute bottom-4 right-3 rotate-180"> {quotation} </div>
                   </div>
                 </Magnetic>

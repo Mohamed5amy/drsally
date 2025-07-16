@@ -69,7 +69,9 @@ const LoginForm = () => {
         // Handle different error types
         switch (response.errorType) {
           case "email_not_verified":
-            toast.error("Email not verified");
+            toast.error("Email not verified, kindly check your email for verification code");
+            localStorage.setItem("email", email)
+            router.push("/email-verification")
             break;
           case "invalid_email":
             toast.error("Invalid email");
