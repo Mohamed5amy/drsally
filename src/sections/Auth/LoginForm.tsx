@@ -8,6 +8,8 @@ import { toast } from "react-toastify"
 import NormalButton from "@/components/custom/NormalButton";
 import Link from "next/link"
 import { LoginRequest } from "@/APIs/auth"
+import Cookies from 'js-cookie';
+
 
 const LoginForm = () => { 
   const signIn = useSignIn();
@@ -17,9 +19,6 @@ const LoginForm = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
-
-  // Remove top-level localStorage usage
-  // const url = localStorage.getItem("url")
 
   // Login Function 
   const handleLogin = async (e: React.FormEvent) => {
@@ -50,12 +49,11 @@ const LoginForm = () => {
         
         if (isSignIn) {
           toast.success("Welcome " + response.data.data.user.name);
-          // Move localStorage access here
           if (typeof window !== "undefined") {
-            const url = localStorage.getItem("url");
+            const url = Cookies.get("url");
             if (url) {
               router.push(url)
-              localStorage.removeItem("url")
+              Cookies.remove("url")
             } else {
               router.push("/")
             }
@@ -70,7 +68,7 @@ const LoginForm = () => {
         switch (response.errorType) {
           case "email_not_verified":
             toast.error("Email not verified, kindly check your email for verification code");
-            localStorage.setItem("email", email)
+            Cookies.set("email", email)
             router.push("/email-verification")
             break;
           case "invalid_email":
@@ -97,10 +95,10 @@ const LoginForm = () => {
   useEffect(() => {
     if (isAuth) {
       if (typeof window !== "undefined") {
-        const url = localStorage.getItem("url");
+        const url = Cookies.get("url");
         if (url) {
           router.push(url)
-          localStorage.removeItem("url")
+          Cookies.remove("url")
         } else {
           router.push("/")
         }

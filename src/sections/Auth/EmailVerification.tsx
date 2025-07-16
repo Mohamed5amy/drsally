@@ -6,6 +6,8 @@ import { toast } from "react-toastify"
 import NormalButton from "@/components/custom/NormalButton";
 import { EmailVerificationRequest } from "@/APIs/auth"
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated"
+import Cookies from 'js-cookie';
+
 
 const EmailVerification = () => { 
   const router = useRouter()
@@ -24,12 +26,12 @@ const EmailVerification = () => {
     }
     setLoading(true);
     try {
-      const email = localStorage.getItem("email")
+      const email = Cookies.get("email")
       const response = await EmailVerificationRequest(email as string, code);
       if (response) {
         toast.success("Email verified successfully");
         router.push("/login");
-        localStorage.removeItem("email");
+        Cookies.remove("email");
       } else {
         toast.error("Invalid code");
       }
@@ -51,7 +53,7 @@ const EmailVerification = () => {
         <div className="flex flex-col gap-3 mb-6">
             <label htmlFor="code">Code</label>
             <input value={code} onChange={e => setCode(e.target.value)} type="text" id="code" placeholder="Code" className="p-4 focus:border-primary gradiantInput rounded-md border border-[#676767]" onKeyDown={e => e.key === 'Enter' && handleEmailVerification(e)} />
-            <p className="opacity-70 text-sm">Check your email : {localStorage?.getItem("email")}</p>
+            <p className="opacity-70 text-sm">Check your email : {Cookies?.get("email")}</p>
         </div>
         {/* Button */}
         <div onClick={e => handleEmailVerification(e)}>

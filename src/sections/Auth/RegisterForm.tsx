@@ -9,6 +9,8 @@ import { redirect, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated"
 import { toast } from "react-toastify"
+import Cookies from 'js-cookie';
+
 
 const RegisterForm = () => {
   const router = useRouter()
@@ -37,7 +39,7 @@ const RegisterForm = () => {
         const response = await RegisterRequest(name , email , password , phone)
         if (response) {
           toast.success("Account created successfully, Kindly check your email for verification")
-          localStorage.setItem("email", email)
+          Cookies.set("email", email)
           router.push("/email-verification")
         }
       } catch (err) {

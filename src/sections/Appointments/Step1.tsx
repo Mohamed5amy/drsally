@@ -5,8 +5,8 @@ import Card from '@/components/ui/Card';
 import { services } from '@/data/services';
 import { useAppointmentStore } from '@/store/useAppointmentStore';
 import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
+import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
 const Step1 = () => {
@@ -25,7 +25,7 @@ const Step1 = () => {
                 router.push('/appointments?step=2')
             } else {
                 toast("Kindly Login First")
-                localStorage.setItem("url", pathname)
+                Cookies.set("url", pathname)
                 router.push("/login")
             }
         }

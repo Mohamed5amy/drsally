@@ -25,6 +25,7 @@
     "date-fns": "^4.1.0",
     "gsap": "^3.13.0",
     "install": "^0.13.0",
+    "js-cookie": "^3.0.5",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.474.0",
     "mouse-follower": "^1.1.2",
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/aos": "^3.0.7",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
