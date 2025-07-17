@@ -40,18 +40,18 @@ const Footer = () => {
                     {/* Social */}
                     <h4 className='text-xl font-semibold mb-4 mt-10'>Stay In Touch</h4>
                     <div className='flex gap-4'>
-                        <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        <Link href={"https://www.linkedin.com/in/sally-mounir?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"} target='_blank' className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
                             <HoverLottie icon={linkedIn} w={30} h={30} /> 
-                        </div>
-                        <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        </Link>
+                        <Link href={"https://www.instagram.com/sallymounir.youmatter?igsh=ejY1aWQ1MWhtd3hr&utm_source=qr"} target='_blank' className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
                             <HoverLottie icon={insta} w={30} h={30} /> 
-                        </div>
-                        <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        </Link>
+                        <Link href={"https://www.facebook.com/share/18qL4g4BVK/?mibextid=wwXIfr"} target='_blank' className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
                             <HoverLottie icon={facebook} w={30} h={30} /> 
-                        </div>
-                        <div className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
+                        </Link>
+                        {/* <Link className='w-12 h-12 rounded-full bg-[#C8DCD7] flex items-center justify-center transition-all hover:scale-150'>
                             <HoverLottie icon={x} w={30} h={30} /> 
-                        </div>
+                        </Link> */}
                     </div>
                 </div>
                 {/* Newsletter */}
