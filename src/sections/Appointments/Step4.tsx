@@ -7,7 +7,6 @@ import { useAppointmentStore } from "@/store/useAppointmentStore"
 import useAuthUser from "react-auth-kit/hooks/useAuthUser"
 import { services } from "@/data/services"
 import { format } from "date-fns"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 function timeStringToDate(timeStr: string) {
@@ -23,33 +22,34 @@ const Step4 = () => {
 
     const user : {name : string} | null = useAuthUser()
 
-    const service = services.find(item => item.id === data.service)
+    const service = services.find(item => item.id === data?.service || null)
 
     const router = useRouter()
 
     const handleClick = () => {
         router.push("/profile/appointments")
+        resetData()
     }
     
   return (
     <div data-aos="fade-up">
-        <div className="py-4 px-8 sm:py-10 sm:px-20 bg-textPrimary max-w-[700px] mx-auto flex items-center justify-center flex-col">
+        {data?.day && <div className="py-4 px-8 sm:py-10 sm:px-20 bg-textPrimary max-w-[700px] mx-auto flex items-center justify-center flex-col">
             <Lottie animationData={animationData} loop autoplay className="w-full h-[200px] sm:h-[300px]" />
             <h4 className="text-xl sm:text-2xl font-semibold text-center"> {user?.name?.split(" ")[0] || ""}, your appointment is confirmed! </h4>
             <div className="flex items-center gap-2 my-3 flex-col sm:flex-row">
                 <span className="text-secondary"> {clock} </span>
-                <span className="sm:text-lg text-center">{service?.duration} | {service?.title}</span>
+                <span className="sm:text-lg text-center">{service && service?.duration} | {service && service?.title}</span>
             </div>
             <div className="flex items-center gap-2 flex-col sm:flex-row mb-8">
                 <span className="text-secondary"> {calenderIcon} </span>
-                <span className="sm:text-lg text-center">{format(data?.day || "" , "eeee, MMMM do, yyyy")} at {format(timeStringToDate(data.slots?.slice(0 , 5) || ""), "h:mm a")} CET</span>
+                <span className="sm:text-lg text-center">{format(data?.day && data?.day || "" , "eeee, MMMM do, yyyy")} at {format(timeStringToDate(data?.slots && data?.slots?.slice(0 , 5) || ""), "h:mm a")} CET</span>
             </div>
             {/* Wednesday, April 30th, 2025 */}
             <div className="flex gap-4 w-full flex-col sm:flex-row">
                 <button className="rounded-full py-4 flex-1 text-primary border border-primary font-semibold transition-all hover:bg-teal-400/20"> Reschedule </button>
                 <button className="rounded-full flex-1 py-4 text-secondaryText border border-secondaryText font-semibold transition-all hover:bg-gray-400/20" onClick={handleClick}> My Appointments </button>
             </div>
-        </div>
+        </div>}
     </div>
   )
 }

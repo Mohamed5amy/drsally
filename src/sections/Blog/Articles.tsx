@@ -1,7 +1,7 @@
 import AnimatedTitle from '@/components/AnimatedTitle'
 import Blog from '@/components/ui/Blog'
 import BlogRow from '@/components/ui/BlogRow'
-import React from 'react'
+import { blogs } from '@/data/blogs'
 
 const Articles = () => {
   return (
@@ -13,10 +13,10 @@ const Articles = () => {
             Here you will find advice and resources to help you make positive changes in your life.
             Whether you're struggling with anxiety, depression, or any other mental health issue, I'm here to provide you with the tools and insight needed to overcome any obstacle that life throws your way. With my experience in psychology and counselling, I'm ready to help you work towards a healthier, happier you. If you have any questions feel free to reach out – I'm always happy to help because you matter.
         </p>
-        <BlogRow />
+        <BlogRow blog={blogs[0]} />
         <div className='grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-6 mt-12'>
-            {[...Array(10)].map((_ , i) => {
-                return <Blog i={i} key={i} />
+            {blogs.slice(1).map((blog , i) => {
+                return <Blog blog={blog} i={i} key={i} />
             })}
         </div>
     </div>

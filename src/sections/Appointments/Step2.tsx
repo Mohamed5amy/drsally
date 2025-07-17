@@ -68,6 +68,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                 router.push('/appointments?step=4')
             } else {
                 toast.error("Something went wrong please try again");
+                console.log(res)
             }
         } catch (err) {
             console.log(err);
