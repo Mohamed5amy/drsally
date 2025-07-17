@@ -44,7 +44,7 @@ export const blogs: BlogType[] = [
     // },
     {
         id: 2,
-        image : "/blog/blog2.jfif",
+        image : "/blog/blog2.jpg",
         title: "A Transformative Journey",
         date : "Aug 1",
         paragraphs : [
@@ -62,12 +62,12 @@ export const blogs: BlogType[] = [
             {
                 title : "2. Meeting Dr. Gabor Maté: A Meeting of Minds",
                 description : "Dr. Gabor Maté's pioneering work in the field of psychotherapy has long been an inspiration to me, and getting the chance to meet him in person was an unparalleled honour. His warmth and wisdom radiated with every word he spoke, and his genuine desire to make a difference in people's lives was abundantly evident. The retreat attendees and I were captivated as Dr. Maté shared his own experiences and insights, leaving us with a richer understanding of the human condition.",
-                image : "/blog/blog2-2.jfif"
+                image : "/blog/blog2-2.jpg"
             },
             {
                 title : "3. A Wealth of Knowledge: Profound Learning Experiences",
                 description : "During the retreat, Dr. Maté delved into various topics, ranging from the impact of childhood trauma to addiction and the connection between mind and body. Every session was thought-provoking, offering profound insights that challenged my existing beliefs and expanded my professional horizons. The opportunity to engage in open discussions with Dr. Maté and fellow attendees allowed for a deep exchange of ideas and perspectives, creating a vibrant learning environment",
-                // image : "/blog/blog2-3.jfif"
+                // image : "/blog/blog2-3.jpg"
             },
             {
                 title : "4. The Power of Self-Reflection: Personal Growth Unveiled",
@@ -82,7 +82,7 @@ export const blogs: BlogType[] = [
             {
                 title : "Conclusion",
                 description : "Attending the retreat with Dr. Gabor Maté and his wife at Zen Rock in Greece was an experience that surpassed all expectations. The powerful combination of the idyllic surroundings, Dr. Maté's wisdom, and the collective knowledge of fellow retreat attendees left an indelible impact on me, both professionally and personally. I wholeheartedly embrace the lessons learned during this retreat. I am grateful for the opportunity to embark on a journey of self-discovery and growth while being immersed in such a beautiful and fulfilling environment.",
-                image : "/blog/blog2-6.jfif"
+                image : "/blog/blog2-6.jpg"
             },
         ]
     },
@@ -284,7 +284,7 @@ export const blogs: BlogType[] = [
     },
     {
         id: 7,
-        image : "/blog/blog7.jfif",
+        image : "/blog/blog7.jpg",
         title: "Self-Care vs. Therapy:",
         date : "Jan 11",
         paragraphs : [
@@ -326,7 +326,7 @@ export const blogs: BlogType[] = [
     },
     {
         id: 8,
-        image : "/blog/blog8.jfif",
+        image : "/blog/blog8.jpg",
         title: "My Journey to Becoming a Psychotherapist",
         date : "Feb 15",
         paragraphs : [
