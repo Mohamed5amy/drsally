@@ -86,3 +86,39 @@ export const questionsRequest = async (token : string , payload : {}) => {
     return false;
   }
 };
+// Checkout URL
+export const getCheckoutUrl = async (token : string , id : number) => {
+  try {
+    const response = await axiosInstance.post("/create-stripe-url", { id } , {
+      headers: {
+          Authorization: "Bearer " + token
+      }
+    });
+    if (response) {
+      return response.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Checkout URL failed:", error);
+    return false;
+  }
+};
+// Rebook
+export const rebookRequest = async (token : string , id : number , payload : {}) => {
+  try {
+    const response = await axiosInstance.post("/update-customer-booking/" + id, payload , {
+      headers: {
+          Authorization: "Bearer " + token
+      }
+    });
+    if (response) {
+      return response.data;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Booking failed:", error);
+    return error;
+  }
+};

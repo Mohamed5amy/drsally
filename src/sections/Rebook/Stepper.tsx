@@ -2,28 +2,20 @@
 
 const Stepper = ({ currentStep , bookings } : {currentStep : number , bookings : number}) => {
   const steps = [
-    { number: 1, title: 'Select Appointment' },
+    { number: 1, title: 'Edit Service' },
     { number: 2, title: 'Date & Time' },
-    { number: 3, title: 'Your Information' },
-    { number: 4, title: 'Payment' },
-    { number: 5, title: 'Confirmation' }
   ];
-
-  
 
   return (
     <div className="w-full max-w-3xl mx-auto relative mb-8 sm:mb-20">
       {/* Background dashed line */}
-      <div className={`absolute left-1/2 -translate-x-1/2 top-3 transform ${bookings === 0 ? "w-[95%] sm:w-[90%]" : "w-[90%] sm:w-[80%]" }`}>
+      <div className={`absolute left-1/2 -translate-x-1/2 top-3 transform w-[95%] sm:w-[65%]`}>
         <div className="border-t-2 border-dashed border-gray-300 mx-12"></div>
       </div>
       
       <div className="flex items-center justify-between relative">
         {steps.map((step, index) => {
-          if (step.number === 3 && bookings > 0) {
-            return
-          } else {
-            return (
+           return (
             <div key={step.number} className="flex items-center justify-center flex-1">
               {/* Step Circle */}
               <div className="flex flex-col items-center">
@@ -49,7 +41,6 @@ const Stepper = ({ currentStep , bookings } : {currentStep : number , bookings :
               </div>
             </div>
             )
-          }
         })}
       </div>
     </div>

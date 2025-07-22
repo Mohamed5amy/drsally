@@ -114,7 +114,9 @@ const Step3 = () => {
             const res = await bookRequest(user?.token || "" , newData)
             if (res) {
                 console.log("Booking Success" , res)
+                setData({booking_id: res.id}) // Save booking ID to store
                 handleSubmitUserData()
+                
             } else {
                 toast.error("Something went wrong please try again");
             }

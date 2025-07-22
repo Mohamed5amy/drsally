@@ -11,6 +11,7 @@ import { persist } from 'zustand/middleware'
 // }
 
 interface FormData {
+  booking_id? : number;
   service : number;
   // Questions
   medicalConditions: string;

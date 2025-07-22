@@ -5,11 +5,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import SimpleCard from '@/components/ui/SimpleCard';
 import { services } from '@/data/services';
 import { calenderIcon, clock } from '@/icons';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { format } from "date-fns";
 import { useAppointmentStore } from '@/store/useAppointmentStore';
 import { useEffect, useState } from 'react';
-import { bookRequest, getSlots } from '@/APIs/appointments';
+import { bookRequest, getSlots, rebookRequest } from '@/APIs/appointments';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { toast } from 'react-toastify';
 
@@ -25,8 +25,8 @@ function timeStringToDate(timeStr: string) {
 function getThirtyMinuteIntervals(slot: string) {
     const [start, end] = slot.split("-");
     const intervals = [];
-    let [startHour, startMinute] = start.split(":")?.map(Number);
-    let [endHour, endMinute] = end.split(":")?.map(Number);
+    let [startHour, startMinute] = start.split(":").map(Number);
+    let [endHour, endMinute] = end.split(":").map(Number);
   
     let current = new Date();
     current.setHours(startHour, startMinute, 0, 0);
@@ -47,6 +47,8 @@ function getThirtyMinuteIntervals(slot: string) {
 
 const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
 
+    const {id} = useParams()
+
     const {data , setData} = useAppointmentStore()
     const router = useRouter()
 
@@ -56,6 +58,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
 
     const handleSubmit = async () => {
         const newData = {
+            _method : "PUT",
             booking_date : data?.day,
             type : service?.title,
             booking_times : getThirtyMinuteIntervals(data.slots || ""),
@@ -63,10 +66,10 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
         }
         setLoading(true)
         try {
-            const res = await bookRequest(user?.token || "" , newData)
+            const res = await rebookRequest(user?.token || "" , Number(id) , newData)
             if (res) {
-                setData({booking_id: res.id})
-                router.push('/appointments?step=4')
+                console.log(res)
+                router.push('/payment-status?status=success')
             } else {
                 toast.error("Something went wrong please try again");
                 console.log(res)
@@ -80,11 +83,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
     }
 
     const handleNext = () => {
-        if (bookings === 0) {
-            router.push('/appointments?step=3')
-        } else {
-            handleSubmit()
-        }
+        handleSubmit()
     }
     const handlePrev = () => {
         router.push('/appointments?step=1')
@@ -136,7 +135,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                             <span className='absolute left-3 text-primary'> {calenderIcon} </span>
                         </SelectTrigger>
                         <SelectContent className='bg-white'>
-                            {days?.map((day, index) => (
+                            {days.map((day, index) => (
                                 <SelectItem key={index} value={day} className='transition-colors hover:bg-bg'>
                                     {format(day , "EEE, d MMM  yyyy")}
                                 </SelectItem>
@@ -155,7 +154,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                             <span className='absolute left-3 text-primary'> {clock} </span>
                         </SelectTrigger>
                         <SelectContent className='bg-white'>
-                            {slots?.length > 0 ? slots?.map((day, index) => (
+                            {slots.length > 0 ? slots.map((day, index) => (
                                 <SelectItem key={index} value={day.start + "-" + day.end} className='transition-colors hover:bg-bg'>
                                     {format(timeStringToDate(day.start), "h:mm a")} - {format(timeStringToDate(day.end), "h:mm a")}
                                 </SelectItem>
@@ -167,7 +166,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
             {/* Buttons */}
             <div className='flex justify-end gap-4 flex-col-reverse sm:flex-row'>
                 <NormalButton onClick={handlePrev} loading={loading} label='Back' styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' />
-                <NormalButton onClick={handleNext} loading={loading} label='Next' styles='px-20 hover:px-24' />
+                <NormalButton onClick={handleNext} loading={loading} label='Save' styles='px-20 hover:px-24' />
             </div>
         </div>
     )

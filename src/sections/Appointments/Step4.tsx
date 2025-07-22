@@ -1,55 +1,80 @@
 "use client"
 
-import Lottie from "lottie-react"
-import animationData from "@/animatedIcons/success.json"
-import { calenderIcon, clock } from "@/icons"
-import { useAppointmentStore } from "@/store/useAppointmentStore"
-import useAuthUser from "react-auth-kit/hooks/useAuthUser"
-import { services } from "@/data/services"
-import { format } from "date-fns"
-import { useRouter } from "next/navigation"
+import { bookRequest, getCheckoutUrl, questionsRequest } from '@/APIs/appointments';
+import NormalButton from '@/components/custom/NormalButton';
+import { services } from '@/data/services';
+import { useAppointmentStore } from '@/store/useAppointmentStore';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import { toast } from 'react-toastify';
 
-function timeStringToDate(timeStr: string) {
-    const [hours, minutes] = timeStr.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hours, minutes, 0, 0);
-    return date;
-  }
 
-const Step4 = () => {
+function getThirtyMinuteIntervals(slot: string) {
+    const [start, end] = slot.split("-");
+    const intervals = [];
+    let [startHour, startMinute] = start.split(":").map(Number);
+    let [endHour, endMinute] = end.split(":").map(Number);
+  
+    let current = new Date();
+    current.setHours(startHour, startMinute, 0, 0);
+  
+    const endTime = new Date();
+    endTime.setHours(endHour, endMinute, 0, 0);
+  
+    while (current < endTime) {
+      const next = new Date(current.getTime() + 30 * 60000);
+      intervals.push({
+        start_time: current.toTimeString().slice(0, 5),
+        end_time: next <= endTime ? next.toTimeString().slice(0, 5) : end.toString(),
+      });
+      current = next;
+    }
+    return intervals;
+}
 
-    const {data , resetData} = useAppointmentStore()
 
-    const user : {name : string} | null = useAuthUser()
-
-    const service = services.find(item => item.id === data?.service || null)
+const Step4 = ({bookings} : {bookings : number}) => {
 
     const router = useRouter()
-
-    const handleClick = () => {
-        router.push("/profile/appointments")
-        resetData()
-    }
+    const {data } = useAppointmentStore()
     
-  return (
-    <div data-aos="fade-up">
-        {data?.day && <div className="py-4 px-8 sm:py-10 sm:px-20 bg-textPrimary max-w-[700px] mx-auto flex items-center justify-center flex-col">
-            <Lottie animationData={animationData} loop autoplay className="w-full h-[200px] sm:h-[300px]" />
-            <h4 className="text-xl sm:text-2xl font-semibold text-center"> {user?.name?.split(" ")[0] || ""}, your appointment is confirmed! </h4>
-            <div className="flex items-center gap-2 my-3 flex-col sm:flex-row">
-                <span className="text-secondary"> {clock} </span>
-                <span className="sm:text-lg text-center">{service && service?.duration} | {service && service?.title}</span>
-            </div>
-            <div className="flex items-center gap-2 flex-col sm:flex-row mb-8">
-                <span className="text-secondary"> {calenderIcon} </span>
-                <span className="sm:text-lg text-center">{format(data?.day && data?.day || "" , "eeee, MMMM do, yyyy")} at {format(timeStringToDate(data?.slots && data?.slots?.slice(0 , 5) || ""), "h:mm a")} CET</span>
-            </div>
-            {/* Wednesday, April 30th, 2025 */}
-            <div className="flex gap-4 w-full flex-col sm:flex-row">
-                <button className="rounded-full py-4 flex-1 text-primary border border-primary font-semibold transition-all hover:bg-teal-400/20"> Reschedule </button>
-                <button className="rounded-full flex-1 py-4 text-secondaryText border border-secondaryText font-semibold transition-all hover:bg-gray-400/20" onClick={handleClick}> My Appointments </button>
-            </div>
-        </div>}
+    const handlePrev = () => {
+        router.push('/appointments?step=2')
+    }
+
+    const user : {token : string} | null = useAuthUser()
+    const [url, setUrl] = useState("")
+
+    // Redirect to Stripe Checkout if url is available
+    useEffect(() => {
+        if (url) {
+            window.location.href = url;
+        }
+    }, [url]);
+
+    // Get checkout url 
+    useEffect(() => {
+        const fetchCheckoutUrl = async () => {
+            const res = await  getCheckoutUrl(user?.token || "" , data.booking_id || 0)
+            if (res) {
+                setUrl(res.checkout_url)
+            } else {
+                toast.error("Failed to get checkout URL")
+            }
+        }
+        if (data.booking_id) {
+            fetchCheckoutUrl()
+        } else {
+            toast.error("Booking ID is missing")
+        }
+    } , [data.booking_id])
+
+    return (
+    <div className='container' data-aos="fade-up">
+        <div className='p-5 bg-textPrimary rounded-3xl mb-4 title'>
+            You will be redirected to Stripe Checkout to complete your payment.
+        </div>
     </div>
   )
 }
