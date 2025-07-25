@@ -9,12 +9,14 @@ import NormalButton from "@/components/custom/NormalButton";
 import Link from "next/link"
 import { LoginRequest } from "@/APIs/auth"
 import Cookies from 'js-cookie';
+import { useTranslations } from "next-intl"
 
 
 const LoginForm = () => { 
   const signIn = useSignIn();
   const router = useRouter()
   const isAuth = useIsAuthenticated()
+  const t = useTranslations()
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -25,7 +27,7 @@ const LoginForm = () => {
     e.preventDefault();
     // Check if the field is filled 
     if (!password || !email) {
-      toast.error("Please fill all fields");
+      toast.error(t("Please fill all fields"));
       return;
     }
     setLoading(true);
@@ -48,7 +50,7 @@ const LoginForm = () => {
         });
         
         if (isSignIn) {
-          toast.success("Welcome " + response.data.data.user.name);
+          toast.success(t("Welcome") + " " + response.data.data.user.name);
           if (typeof window !== "undefined") {
             const url = Cookies.get("url");
             if (url) {
@@ -61,32 +63,32 @@ const LoginForm = () => {
             router.push("/")
           }
         } else {
-          toast.error("Something went wrong");
+          toast.error(t("Something went wrong"));
         }
       } else {
         // Handle different error types
         switch (response.errorType) {
           case "email_not_verified":
-            toast.error("Email not verified, kindly check your email for verification code");
+            toast.error(t("Email not verified, kindly check your email for verification code"));
             Cookies.set("email", email)
             router.push("/email-verification")
             break;
           case "invalid_email":
-            toast.error("Invalid email");
+            toast.error(t("Invalid email"));
             break;
           case "invalid_password":
-            toast.error("Invalid password");
+            toast.error(t("Invalid password"));
             break;
           case "network":
-            toast.error("Network error");
+            toast.error(t("Network error"));
             break;
           default:
-            toast.error(response.error || "Login failed");
+            toast.error(response.error || t("Login failed"));
         }
       }
     } catch (err) {
       console.log(err);
-      toast.error("Unexpected error");
+      toast.error(t("Unexpected error"));
     } finally {
       setLoading(false);
     }
@@ -112,24 +114,24 @@ const LoginForm = () => {
     <div>
         {/* Email */}
         <div className="flex flex-col gap-3 mb-6">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t("contact_email")}</label>
             <input value={email} onChange={e => setEmail(e.target.value)} type="text" id="email" placeholder="Email" className="p-4 focus:border-primary gradiantInput rounded-md border border-[#676767]" onKeyDown={e => e.key === 'Enter' && handleLogin(e)} />
         </div>
         {/* Password */}
         <div className="flex flex-col gap-3 mb-3">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("edit_password_label")}</label>
             <input value={password} onChange={e => setPassword(e.target.value)} type="password" id="password" placeholder="Password" className="p-4 focus:border-primary gradiantInput rounded-md border border-[#676767]" onKeyDown={e => e.key === 'Enter' && handleLogin(e)} />
         </div>
         {/* Remember && Forget Password */}
         <div className="flex flex-row gap-4 items-center justify-between mb-8">
             {/* Forget Password */}
-            <Link href={"/forget-password"} className="text-logo transition-colors hover:text-secondary">Forget Password?</Link>
+            <Link href={"/forget-password"} className="text-logo transition-colors hover:text-secondary">{t("Forget Password?")}</Link>
         </div>
         {/* Button */}
-        <div onClick={e => handleLogin(e)}> <NormalButton label="Login" styles="w-full" loading={loading} /> </div>
+        <div onClick={e => handleLogin(e)}> <NormalButton label={t("nav_login")} styles="w-full" loading={loading} /> </div>
         {/* Dont have account */}
         <div className="flex flex-row gap-4 items-center justify-center mt-4">
-            <div>Don't have an account? <Link href={"/register"} className="text-logo transition-colors hover:text-secondary">Register</Link></div>
+            <div>{t("Don't have an account?")} <Link href={"/register"} className="text-logo transition-colors hover:text-secondary">{t("Register")}</Link></div>
         </div>
     </div>
   )

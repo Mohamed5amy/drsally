@@ -1,9 +1,11 @@
 import AnimatedTitle from '@/components/AnimatedTitle'
 import { homeIcon, rightChevron } from '@/icons'
+import { getLocale } from 'next-intl/server'
 import Image from 'next/image'
 import React from 'react'
 
-const Header = ({label} : {label : string}) => {
+const Header = async ({label} : {label : string}) => {
+  const locale = await getLocale()
   return (
     <div className="py-36 relative overflow-hidden">
         <div className='container'>
@@ -13,7 +15,7 @@ const Header = ({label} : {label : string}) => {
             {/* Breadcrumbs */}
             <div className="flex items-center gap-2">
                 {homeIcon}
-                {rightChevron}
+                <span className={locale === "en" ? '' : 'rotate-180'}>{rightChevron}</span>
                 <p className='text-xl font-bold'>{label}</p>
             </div>
         </div>

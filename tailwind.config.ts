@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily: {
+			'noto-sans-arabic': ['var(--font-noto-sans-arabic)', 'Noto Sans Arabic', 'sans-serif'],
+			'public-sans': ['var(--font-public-sans)', 'Public Sans', 'sans-serif'],
+		},
   		colors: {
 			bg: 'hsl(var(--bg))',
 			primary: 'hsl(var(--primary))',

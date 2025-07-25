@@ -1,11 +1,12 @@
 import Articles from '@/sections/Blog/Articles'
 import Header from '@/sections/Blog/Header'
-import React from 'react'
+import { getTranslations } from "next-intl/server"
 
-const page = () => {
+const page = async () => {
+  const t = await getTranslations()
   return (
     <div>
-        <Header label='Blog' />
+        <Header label={t('Blog')} />
         <Articles />
     </div>
   )

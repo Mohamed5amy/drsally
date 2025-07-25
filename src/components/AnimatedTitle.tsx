@@ -9,21 +9,24 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(SplitText , ScrollTrigger);
 
 const AnimatedTitle = ({ children, className = "" , delay } : {children : ReactNode , className : string , delay? : boolean}) => {
-  const titleRef = useRef(null);
+  const titleRef : any = useRef(null);
 
   useEffect(() => {
     let split : any;
     let anim : any;
 
     if (titleRef.current) {
+      // Detect if the text is Arabic
+      const textContent = titleRef.current.textContent || "";
+      const isArabic = /[\u0600-\u06FF]/.test(textContent);
       // Split text
       split = new SplitText(titleRef.current, {
-        type: "chars,words",
+        type: isArabic ? "words" : "chars,words",
         position: "relative"
       });
 
       // Animate
-      anim = gsap.from(split.chars, {
+      anim = gsap.from(isArabic ? split.words : split.chars, {
         duration: 1.5,
         yPercent: "random(100, -100)",
         rotate: "random(30, -30)",

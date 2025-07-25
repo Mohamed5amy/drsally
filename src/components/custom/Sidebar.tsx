@@ -7,6 +7,7 @@ import calender from "@/animatedIcons/calender.json"
 import LogoutPopup from "./LogoutPopup";
 import dynamic from "next/dynamic";
 import logout from "@/animatedIcons/logout.json"
+import { useTranslations } from 'next-intl';
 const HoverLottie = dynamic(() => import('@/components/HoverLottie') , {ssr : false})
 
 const Sidebar = ({page} : {page : string}) => {
@@ -17,9 +18,10 @@ const Sidebar = ({page} : {page : string}) => {
     logout : false
   })
   
+  const t = useTranslations();
   const links = [
-    {name : "My Profile" , link : "/profile" , iconName : "user" , icon : <HoverLottie play={play.user} icon={user} w={24} h={24} />},
-    {name : "My Appointments" , link : "/profile/appointments" , iconName : "calender" , icon : <HoverLottie play={play.calender} icon={calender} w={24} h={24} />},
+    {name : t('sidebar_profile') , link : "/profile" , iconName : "user" , icon : <HoverLottie play={play.user} icon={user} w={24} h={24} />},
+    {name : t('sidebar_appointments') , link : "/profile/appointments" , iconName : "calender" , icon : <HoverLottie play={play.calender} icon={calender} w={24} h={24} />},
   ]
 
   const [active, setActive] = useState(false)
@@ -42,10 +44,10 @@ const Sidebar = ({page} : {page : string}) => {
           <span className={`text-textSecondary transition-colors group-hover:text-primary`}>
             <HoverLottie icon={logout} w={24} h={24} play={play.logout} />
           </span>
-          Logout
+          {t('sidebar_logout')}
         </div>
         {active && <LogoutPopup setActive={setActive} />}
-      </div>
+    </div>
   )
 }
 

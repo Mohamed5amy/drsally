@@ -5,6 +5,8 @@ import { testimonials } from "@/data/testimonials";
 import { quotation } from "@/icons"
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLocale, useTranslations } from "next-intl";
+import { comment } from "postcss";
 import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,6 +15,9 @@ const Testimonials = () => {
 
     const sectionRef : any = useRef(null);
     const containerRef : any = useRef(null);
+
+    const t = useTranslations()
+    const locale = useLocale()
 
     useEffect(() => {
         const section = sectionRef.current;
@@ -64,9 +69,13 @@ const Testimonials = () => {
       }, []);
     
   return (
-    <div className="py-4 sm:py-8 lg:py-20 overflow-hidden relative mb-0 md:mb-36" ref={sectionRef}>
-        <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'> Client Experiences </AnimatedTitle>
-        <p className='text-lightText text-xl mb-8 text-center'>Hear from others who have worked with me on their journey toward healing and growth.</p>
+    <div dir="ltr" className="py-4 sm:py-8 lg:py-20 overflow-hidden relative mb-0 md:mb-36" ref={sectionRef}>
+        <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'>
+          {t("clientExperiencesTitle")}
+        </AnimatedTitle>
+        <p className='text-lightText text-xl mb-8 text-center'>
+          {t("clientExperiencesDescription")}
+        </p>
         {/* Boxes */}
         <div className="flex gap-10" ref={containerRef}>
             {testimonials.slice(0 , 10).map((testimonial, idx) => (
@@ -76,7 +85,7 @@ const Testimonials = () => {
             >
                 <div className="absolute top-4 left-3"> {quotation} </div>
                 <p className="text-sm lg:text-lg mb-2">
-                {testimonial.comment}
+                {locale === "en" ? testimonial.comment : testimonial.commentAr}
                 </p>
                 <h4 className="text-2xl font-semibold text-secondaryText">— {testimonial.name}</h4>
                 <div className="absolute bottom-4 right-3 rotate-180"> {quotation} </div>

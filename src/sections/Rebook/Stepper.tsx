@@ -1,9 +1,11 @@
+import { getTranslations } from "next-intl/server";
 
 
-const Stepper = ({ currentStep , bookings } : {currentStep : number , bookings : number}) => {
+const Stepper = async ({ currentStep } : {currentStep : number , bookings : number}) => {
+  const t = await getTranslations()
   const steps = [
-    { number: 1, title: 'Edit Service' },
-    { number: 2, title: 'Date & Time' },
+    { number: 1, title: t('step_select_appointment') },
+    { number: 2, title: t('step_date_time') },
   ];
 
   return (

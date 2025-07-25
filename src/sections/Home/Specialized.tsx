@@ -3,22 +3,27 @@ import Button from "@/components/custom/Button"
 import Parallax from "@/components/Parallax"
 import { calenderIcon } from "@/icons"
 import Image from "next/image"
+import { getTranslations } from "next-intl/server"
 
-const Specialized = () => {
+const Specialized = async () => {
+  const t = await getTranslations()
+
   return (
     <div className="py-0 sm:py-20 flex-col lg:flex-row container flex gap-16 items-center">
         {/* Content */}
         <div className="flex-[1.1]">
             <Parallax distance={150} direction="up" end="bottom center">
-              <AnimatedTitle className="text-xl md:text-3xl font-bold pb-2"> Specialized Holistic Therapy for Lasting Mental Well-being </AnimatedTitle>
+              <AnimatedTitle className="text-xl md:text-3xl font-bold pb-2">
+                {t("specializedTherapyTitle")}
+              </AnimatedTitle>
               <p className="text-lightText text-[16px] md:text-xl mb-10">
-              I specialise in addressing various mental health challenges with a scientifically grounded holistic approach. My training is continuously updated with the latest advancements in neuroscience and psychology, allowing me to offer therapy that targets the core issues that may have kept you feeling stuck.
-              <span className="block h-2"></span>
-              I understand that many people seek therapy to see tangible progress and lasting change. While ongoing support can benefit some, my focus is on empowering you to achieve meaningful results and build a fulfilling life as efficiently as possible. Let's begin that journey today.
-              <span className="block h-2"></span>
-              I offer a complimentary 15-minute consultation to discuss your needs and how my approach can help you become the best version of yourself. Please email me to schedule your free consultation. For clients who may benefit from medication, I collaborate with trusted psychiatrists to ensure comprehensive care. While I believe in exploring therapeutic avenues first, I recognise the value of medication when necessary and work as part of your wider support team.
+                {t("specializedTherapyDescription1")}
+                <span className="block h-2"></span>
+                {t("specializedTherapyDescription2")}
+                <span className="block h-2"></span>
+                {t("specializedTherapyDescription3")}
               </p>
-              <Button label="Schedule Your Free Consultation" icon={calenderIcon} />
+              <Button label={t("scheduleConsultation")} icon={calenderIcon} />
             </Parallax>
         </div>
         {/* Image */}

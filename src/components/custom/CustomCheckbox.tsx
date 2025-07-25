@@ -60,7 +60,7 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
             <label
                 htmlFor={id}
                 className={`
-                    ml-2 font-medium
+                    ms-2 font-medium
                     ${disabled 
                         ? 'text-gray-400' 
                         : 'text-gray-700 cursor-pointer'

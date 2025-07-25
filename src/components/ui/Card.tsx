@@ -3,12 +3,16 @@
 import { clock, rightChevron2 } from '@/icons';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 const Card: React.FC<ServiceCardProps> = ({
   title = "Example service",
+  titleAr = "خدمة مثال",
   description = "Description of your service",
+  descriptionAr = "وصف خدمتك",
   duration = "1 hour",
+  durationAr = "1 hour",
   onBookClick = () => console.log('Book service clicked'),
   price = "150",
   service = 0,
@@ -25,12 +29,15 @@ const Card: React.FC<ServiceCardProps> = ({
         }
     }, [service, number])
 
+    const t = useTranslations();
+    const locale = useLocale();
+
   return (
-    <div className='flex flex-1 items-center gap-2'>
+    <div className={`flex flex-1 items-center gap-2 ${locale === "ar" ? "flex-row-reverse" : ""}`}>
         {/* Arrow */}
         <div className={`hidden lg:flex items-center relative gap-0 transition-all duration-1000 ${active ? "w-[10%]" : "w-[0%]"}`}>
-            {active && <span className='text-primary' data-aos="fade-right" data-aos-duration="1500">{rightChevron2}</span>}
-            {active && <span className='text-secondary absolute -left-6 bottom-0' data-aos="fade-right" data-aos-delay="400" data-aos-duration="1500">{rightChevron2}</span>}
+            {active && <span className={`text-primary ${locale === "ar" ? "rotate-180" : ""}`} data-aos="fade-right" data-aos-duration="1500">{rightChevron2}</span>}
+            {active && <span className={`text-secondary absolute -start-6 bottom-0 ${locale === "ar" ? "rotate-180" : ""}`} data-aos="fade-right" data-aos-delay="400" data-aos-duration="1500">{rightChevron2}</span>}
         </div>
         {/* Card */}
         <div className={`${active && "ring-4 ring-[rgba(100,156,159,0.10)]"} flex-1 bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden transition-all`}>
@@ -49,11 +56,11 @@ const Card: React.FC<ServiceCardProps> = ({
                 {/* Service Content */}
                 <div className="flex-grow">
                     <h3 className="text-2xl font-semibold text-primaryText mb-3">
-                        {title}
+                        {locale === "en" ? title : titleAr}
                     </h3>
                     
                     <p className="text-primaryText mb-4 text-base">
-                        {description}
+                        {locale === "en" ? description : descriptionAr}
                     </p>
 
                     {/* Duration & Price */}
@@ -61,14 +68,14 @@ const Card: React.FC<ServiceCardProps> = ({
                         {/* Duration */}
                         <div className="flex items-center text-secondary">
                             {clock}
-                            <span className="text-base text-primaryText ml-2 font-medium">{duration}</span>
+                            <span className="text-base text-primaryText ms-2 font-medium">{t('card_duration')}: {locale === "en" ? duration : durationAr}</span>
                         </div>
                         {/* Separator */}
                         <div className="h-4 w-px bg-gray-200"></div>
                         {/* Price */}
                         <div className="flex items-center text-secondary">
                             <span className='block text-xl'>$</span>
-                            <span className="text-base text-primaryText ml-2 font-medium">{price}</span>
+                            <span className="text-base text-primaryText ms-2 font-medium">{t('card_price')}: {price}</span>
                         </div>
                     </div>
                 </div>
@@ -78,11 +85,11 @@ const Card: React.FC<ServiceCardProps> = ({
                     {active ? <button
                         onClick={() => {setActive(!active); onBookClick()}}
                         className="px-12 py-4 border-2 border-primary rounded-full font-medium transition-all w-full relative group hover:px-14 bg-primary text-white">
-                        Unselect Service
+                        {t('card_unselectService')}
                     </button> : <button
                         onClick={() => {setActive(!active); onBookClick()}}
                         className="px-12 py-4 bg-white border-2 border-primary text-primary rounded-full font-medium transition-all w-full relative group hover:px-14 hover:bg-primary hover:text-white">
-                        Select Service
+                        {t('card_selectService')}
                     </button>}
                 </div>
             </div>
@@ -93,8 +100,11 @@ const Card: React.FC<ServiceCardProps> = ({
 
 interface ServiceCardProps {
   title?: string;
+  titleAr?: string;
   description?: string;
+  descriptionAr?: string;
   duration?: string;
+  durationAr?: string;
   onBookClick?: () => void;
   price?: string;
   service?: number;

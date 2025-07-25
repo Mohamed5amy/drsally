@@ -8,6 +8,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 const Step1 = () => {
 
@@ -16,6 +17,7 @@ const Step1 = () => {
     const isAuth = useIsAuthenticated()
     const pathname = usePathname()
     const {id} = useParams()
+    const t = useTranslations()
     
     const handleNext = () => {
         if(data.service === 0) {
@@ -40,11 +42,14 @@ const Step1 = () => {
                             <Card
                                 key={item.id}
                                 title={item.title}
+                                titleAr={item.titleAr}
                                 description={item.description}
+                                descriptionAr={item.descriptionAr}
                                 service={data.service}
                                 number={item.id}
                                 onBookClick={() => {item.id === data.service ? setData({service: 0}) : setData({service: item.id})}}
                                 duration={item.duration}
+                                durationAr={item.durationAr}
                                 price={item.price}
                             />
                         )
@@ -52,7 +57,7 @@ const Step1 = () => {
                 })}
             </div>
             <div className='flex justify-end'>
-                <NormalButton label='Next' styles='px-20 hover:px-24 w-full sm:w-fit' onClick={handleNext} />
+                <NormalButton label={t('Next')} styles='px-20 hover:px-24 w-full sm:w-fit' onClick={handleNext} />
             </div>
         </div>
     )

@@ -1,14 +1,19 @@
 import { clock, editIcon } from "@/icons";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
 const SimpleCard: React.FC<ServiceCardProps> = ({
   title = "Example service",
+    titleAr = "خدمة مثال",
   description = "Description of your service",
+  descriptionAr = "وصف خدمتك",
   duration = "1 hour",
+  durationAr = "1 ساعة",
   price = "150",
 }) => {
 
+    const locale = useLocale();
 
   return (
     <div className='flex flex-1 items-center gap-2'>
@@ -29,11 +34,11 @@ const SimpleCard: React.FC<ServiceCardProps> = ({
                 {/* Service Content */}
                 <div className="flex-grow">
                     <h3 className="text-2xl font-semibold text-primaryText mb-3">
-                        {title}
+                        {locale === "en" ? title : titleAr}
                     </h3>
                     
                     <p className="text-primaryText mb-4 text-base">
-                        {description}
+                        {locale === "en" ? description : descriptionAr}
                     </p>
 
                     {/* Duration & Price */}
@@ -41,14 +46,14 @@ const SimpleCard: React.FC<ServiceCardProps> = ({
                             {/* Duration */}
                             <div className="flex items-center text-secondary">
                                 {clock}
-                                <span className="text-base text-primaryText ml-2 font-medium">{duration}</span>
+                                <span className="text-base text-primaryText ms-2 font-medium">{locale === "en" ? duration : durationAr}</span>
                             </div>
                             {/* Separator */}
                             <div className="h-4 w-px bg-gray-200"></div>
                             {/* Price */}
                             <div className="flex items-center text-secondary">
                                 <span className='block text-xl'>$</span>
-                                <span className="text-base text-primaryText ml-2 font-medium">{price}</span>
+                                <span className="text-base text-primaryText ms-2 font-medium">{price}</span>
                             </div>
                     </div>
                 </div>
@@ -68,8 +73,11 @@ const SimpleCard: React.FC<ServiceCardProps> = ({
 
 interface ServiceCardProps {
   title?: string;
+    titleAr?: string;
   description?: string;
+  descriptionAr?: string;
   duration?: string;
+  durationAr?: string;
   onBookClick?: () => void;
   price?: string;
 }

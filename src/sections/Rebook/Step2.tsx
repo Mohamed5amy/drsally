@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import { bookRequest, getSlots, rebookRequest } from '@/APIs/appointments';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 
 
 // Helper to convert "14:00" to a Date object (today's date)
@@ -56,6 +57,8 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
 
     const [loading, setLoading] = useState(false)
 
+    const t = useTranslations()
+
     const handleSubmit = async () => {
         const newData = {
             _method : "PUT",
@@ -71,12 +74,12 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                 console.log(res)
                 router.push('/payment-status?status=success')
             } else {
-                toast.error("Something went wrong please try again");
+                toast.error(t("Something went wrong please try again"));
                 console.log(res)
             }
         } catch (err) {
             console.log(err);
-            toast.error("Something went wrong please try again");
+            toast.error(t("Something went wrong please try again"));
         } finally {
             setLoading(false)
         }
@@ -101,7 +104,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                 setSlots(res[0])
             } catch (err) {
                 console.log(err)
-                toast.error("Ops something went wrong")
+                toast.error(t("Something went wrong please try again"))
             }
         }
 
@@ -114,24 +117,27 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
             {/* Card */}
             <SimpleCard 
                 title={service?.title}
+                titleAr={service?.titleAr}
                 description={service?.description}
+                descriptionAr={service?.descriptionAr}
                 duration={service?.duration}
+                durationAr={service?.durationAr}
                 price={service?.price}
             />
             {/* Time */}
             <div className='flex items-center justify-between mt-12 mb-6 flex-col md:flex-row'>
-                <h4 className='text-primaryText text-lg md:text-xl lg:text-2xl font-semibold'> Select Date & Time </h4>
-                <h4 className='text-secondaryText md:text-lg lg:text-xl font-semibold'> Time Zone : Central European Time (CET) </h4>
+                <h4 className='text-primaryText text-lg md:text-xl lg:text-2xl font-semibold'> {t("select_date_time")} </h4>
+                <h4 className='text-secondaryText md:text-lg lg:text-xl font-semibold'> {t("time_zone")} </h4>
             </div>
             <div className='p-5 bg-textPrimary rounded-3xl flex items-center gap-4 mb-14 flex-col md:flex-row'>
                 {/* Date Picker */}
                 <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
                     <label htmlFor="date" className="md:text-xl font-bold">
-                    Select Date
+                   {t("select_date")}
                     </label>
                     <Select value={data.day} onValueChange={(value) => setData({day: value})}>
                         <SelectTrigger className='p-3 h-12 font-semibold ps-11 rounded-xl bg-bg border border-[#C8DCD7] relative'>
-                            <SelectValue placeholder="Available Dates" />
+                            <SelectValue placeholder={t("available_dates")} />
                             <span className='absolute left-3 text-primary'> {calenderIcon} </span>
                         </SelectTrigger>
                         <SelectContent className='bg-white'>
@@ -146,7 +152,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                 {/* Time Picker */}
                 <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
                     <label htmlFor="date" className="md:text-xl font-bold">
-                    Select Slot
+                    {t("available_slots")}
                     </label>
                     <Select value={data.slots} onValueChange={value => setData({slots : value})} disabled={!data.day}>
                         <SelectTrigger className='p-3 h-12 font-semibold ps-11 rounded-xl bg-bg border border-[#C8DCD7] relative'>
@@ -158,15 +164,15 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                                 <SelectItem key={index} value={day.start + "-" + day.end} className='transition-colors hover:bg-bg'>
                                     {format(timeStringToDate(day.start), "h:mm a")} - {format(timeStringToDate(day.end), "h:mm a")}
                                 </SelectItem>
-                            )) : <p className='p-4 font-semibold'> Sorry, Saly has no available slots in that day, Kindly try another day. </p> }
+                            )) : <p className='p-4 font-semibold'> {t("no_slots")} </p> }
                         </SelectContent>
                     </Select>
                 </div>
             </div>
             {/* Buttons */}
             <div className='flex justify-end gap-4 flex-col-reverse sm:flex-row'>
-                <NormalButton onClick={handlePrev} loading={loading} label='Back' styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' />
-                <NormalButton onClick={handleNext} loading={loading} label='Save' styles='px-20 hover:px-24' />
+                <NormalButton onClick={handlePrev} loading={loading} label={t("back")} styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' />
+                <NormalButton onClick={handleNext} loading={loading} label={t("save")} styles='px-20 hover:px-24' />
             </div>
         </div>
     )

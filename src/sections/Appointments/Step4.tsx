@@ -4,6 +4,7 @@ import { bookRequest, getCheckoutUrl, questionsRequest } from '@/APIs/appointmen
 import NormalButton from '@/components/custom/NormalButton';
 import { services } from '@/data/services';
 import { useAppointmentStore } from '@/store/useAppointmentStore';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
@@ -38,10 +39,8 @@ const Step4 = ({bookings} : {bookings : number}) => {
 
     const router = useRouter()
     const {data } = useAppointmentStore()
-    
-    const handlePrev = () => {
-        router.push('/appointments?step=2')
-    }
+
+    const t = useTranslations()
 
     const user : {token : string} | null = useAuthUser()
     const [url, setUrl] = useState("")
@@ -73,7 +72,7 @@ const Step4 = ({bookings} : {bookings : number}) => {
     return (
     <div className='container' data-aos="fade-up">
         <div className='p-5 bg-textPrimary rounded-3xl mb-4 title'>
-            You will be redirected to Stripe Checkout to complete your payment.
+            {t("You will be redirected to Stripe Checkout to complete your payment")}
         </div>
     </div>
   )

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react';
-import { ArrowRight, Calendar, Clock, Wrench, DollarSign, CheckCircle, XCircle, AlertCircle, Activity, Zap, Info, ChevronLeft, Group, ShieldAlert } from 'lucide-react';
+import { Calendar, Clock, Wrench, DollarSign, CheckCircle, XCircle, Activity, Zap, Info, ChevronLeft, Group } from 'lucide-react';
 import Link from 'next/link';
 import NormalButton from '@/components/custom/NormalButton';
 import { format } from 'date-fns';
@@ -9,6 +9,9 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { useAppointmentStore } from '@/store/useAppointmentStore';
 import { services } from '@/data/services';
+import { useLocale, useTranslations } from 'next-intl';
+import { enUS, ar } from "date-fns/locale";
+
 
 interface Reservation {
   id: number;
@@ -103,11 +106,13 @@ export function getServiceNameById(name: string): number | undefined {
 const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
 
   const {setData} = useAppointmentStore()
+  const t = useTranslations()
+  const locale = useLocale()
   
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage: number = 10;
   const router = useRouter()
-  console.log(bookings)
+  const dateFnsLocale = locale === "ar" ? ar : enUS;
 
   // Calculate pagination
   const totalPages: number = Math.ceil(bookings.length / itemsPerPage);
@@ -123,9 +128,6 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
     setCurrentPage(prev => Math.min(prev + 1, totalPages));
   };
 
-  // Handle Popup
-  const [id, setId] = useState<string>("")
-
   const handleReservationClick = (reservation: Reservation) => {
     const hours = getHoursUntilSwissTime(reservation.booking_date, reservation.times[0]?.start_time)
     if (hours > 48) {
@@ -137,21 +139,23 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
   }
 
   const handlePayNowClick = (reservation: Reservation) => {
-    setData({ booking_id: reservation.id , service: getServiceNameById(reservation.type) || 0 , day: reservation.booking_date, slots: reservation.times[0].start_time + "-" + reservation.times[reservation.times.length - 1].end_time });
-    router.push('/appointments?step=4');
+    const hours = getHoursUntilSwissTime(reservation.booking_date, reservation.times[0]?.start_time)
+    if (hours > 48) {
+      setData({ booking_id: reservation.id , service: getServiceNameById(reservation.type) || 0 , day: reservation.booking_date, slots: reservation.times[0].start_time + "-" + reservation.times[reservation.times.length - 1].end_time });
+      router.push('/appointments?step=4');
+    } else {
+      toast.error("You can only pay for a failed appointment more than 48 hours in advance.");
+    }
   }
-
-  console.log(isNowAfterSwissTime(bookings[1].booking_date, bookings[1].times[0].start_time))
   
   return (
     <div className="max-w-full">
-      <Link href={"/profile"} className='flex items-center gap-2 mb-4 transition-colors hover:text-secondary'> <ChevronLeft /> Back 
+      <Link href={"/profile"} className='flex items-center gap-2 mb-4 transition-colors hover:text-secondary'> <ChevronLeft className={locale === "en" ? "" : "rotate-180 block"} /> {t("Back")} 
       </Link>
       <div className="bg-white rounded-3xl shadow-lg overflow-hidden">
         <div className="bg-gray-50 px-4 py-4">
-          <h2 className="text-xl font-semibold">Upcoming Reservations</h2>
-          <p className="opacity-80 text-sm mt-1 mb-2">Manage and view your reservations</p>
-          {/* <div className='flex items-center gap-2 text-sm font-medium text-red-500'> <ShieldAlert className='text-red-600 h-4 w-4' /> Hello </div> */}
+          <h2 className="text-xl font-semibold">{t("Upcoming Reservations")}</h2>
+          <p className="opacity-80 text-sm mt-1 mb-2">{t("Manage and view your reservations")}</p>
         </div>
         
         <div className="overflow-x-auto">
@@ -161,55 +165,55 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    Date
+                    {t("Date")}
                   </div>
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
-                    Time
+                    {t("Time")} (CET)
                   </div>
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <Zap className="w-4 h-4" />
-                    Duration
+                    {t("Duration")}
                   </div>
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <Wrench className="w-4 h-4" />
-                    Service
+                    {t("Service")}
                   </div>
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <DollarSign className="w-4 h-4" />
-                    Price
+                    {t("Price")}
                   </div>
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <Activity className="w-4 h-4" />
-                    Payment
+                    {t("Payment")}
                   </div>
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <Info className="w-4 h-4" />
-                    Actions
+                    {t("Actions")}
                   </div>
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   <div className="flex items-center gap-2">
                     <Group className="w-4 h-4" />
-                    Meeting
+                    {t("Meeting")}
                   </div>
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {currentReservations.length > 0 ? currentReservations.map((reservation: Reservation, index: number) => (
+              {currentReservations.reverse().length > 0 ? currentReservations.map((reservation: Reservation, index: number) => (
                 !isNowAfterSwissTime(reservation.booking_date, reservation.times[reservation.times.length - 1].end_time) && <tr
                   key={reservation.id} 
                   className={`hover:bg-gray-50 transition-colors ${
@@ -220,33 +224,33 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
                     {formatDate(reservation.booking_date)}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
-                    {format(timeStringToDate(reservation?.times[0]?.start_time), "h:mm a")}
+                    {format(timeStringToDate(reservation?.times[0]?.start_time), "h:mm a" , {locale : dateFnsLocale})}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
-                    {reservation.times.length === 2 ? "60 Mins" : "90 Mins"}
+                    {reservation.times.length === 2 ? t("60 Mins") : t("90 Mins")}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
-                    {reservation.type}
+                    {t(reservation.type)}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                    ${reservation.price?.toFixed(2) || "No Price"}
+                    ${reservation.price?.toFixed(2) || t("No Price")}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap">
                     <div className="flex items-center gap-2 capitalize">
                       {getStatusIcon(reservation.payment_status)}
                       <span className={getStatusBadge(reservation.payment_status)}>
-                        {reservation.payment_status}
+                        {t(reservation.payment_status)}
                       </span>
                     </div>
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap flex gap-2">
-                    {reservation.payment_status === "paid" ? <button className='text-sm font-semibold underline text-primary' onClick={() => handleReservationClick(reservation)}>Reschedule</button> : <div onClick={() => handlePayNowClick(reservation)} className='cursor-pointer text-sm font-semibold underline text-primary'> Pay Now </div>}
+                    {reservation.payment_status === "paid" ? <button className='text-sm font-semibold underline text-primary' onClick={() => handleReservationClick(reservation)}>{t("Reschedule")}</button> : <div onClick={() => handlePayNowClick(reservation)} className='cursor-pointer text-sm font-semibold underline text-primary'> {t("Pay Now")} </div>}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap">
-                    {getHoursUntilSwissTime(reservation.booking_date , reservation.times[0].start_time) <= 1 && reservation.payment_status ? <Link href={reservation.zoom_url} target='_blank' className='text-sm font-semibold underline text-primary'>Meeting Link</Link> : <span className='text-xs'>Not Available Yet</span>}
+                    {getHoursUntilSwissTime(reservation.booking_date , reservation.times[0].start_time) <= 1 && reservation.payment_status ? <Link href={reservation.zoom_url} target='_blank' className='text-sm font-semibold underline text-primary'>{t("Meeting Link")}</Link> : <span className='text-xs'>{t("Not Available Yet")}</span>}
                   </td>
                 </tr>
-              )) : <p className='p-4 font-medium'>No Reservations Here</p> }
+              )) : <p className='p-4 font-medium'>{t("No Reservations Here")}</p> }
             </tbody>
           </table>
         </div>
@@ -254,8 +258,8 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
         {currentReservations.length > 0 && <div className="bg-gray-50 px-4 py-3 border-t border-gray-200">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-700 text-center sm:text-left">
-              Showing <span className="font-medium">{startIndex + 1}</span> to <span className="font-medium">{Math.min(endIndex, bookings.length)}</span> of{' '}
-              <span className="font-medium">{bookings.length}</span> results
+              {t("Showing")} <span className="font-medium">{startIndex + 1}</span> {t("to")} <span className="font-medium">{Math.min(endIndex, bookings.length)}</span> {t("of")}{' '}
+              <span className="font-medium">{bookings.length}</span> {t("results")}
             </p>
             <div className="flex items-center gap-2">
               <button 
@@ -267,10 +271,10 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
                     : 'bg-white hover:bg-gray-50 text-gray-700'
                 }`}
               >
-                Previous
+                {t("Previous")}
               </button>
               <span className="px-2 sm:px-3 py-1 text-sm text-gray-700 whitespace-nowrap">
-                Page {currentPage} of {totalPages}
+                {t("Page")} {currentPage} {t("of")} {totalPages}
               </span>
               <button 
                 onClick={handleNextPage}
@@ -281,13 +285,13 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
                     : 'bg-primary text-white hover:bg-primary-600'
                 }`}
               >
-                Next
+                {t("Next")}
               </button>
             </div>
           </div>
         </div>}
       </div>
-      {id && <Popup id={id} setId={setId} />}
+      {/* {id && <Popup id={id} setId={setId} />} */}
     </div>
   );
 };

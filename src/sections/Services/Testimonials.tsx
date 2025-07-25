@@ -1,7 +1,9 @@
+
 import AnimatedTitle from "@/components/AnimatedTitle";
 import Magnetic from "@/components/Magnetic";
 import { testimonials } from "@/data/testimonials";
 import { quotation } from "@/icons"
+import { useLocale, useTranslations } from 'next-intl';
 
 function shuffleArray(array : any) {
   let currentIndex = array.length;
@@ -24,17 +26,21 @@ function shuffleArray(array : any) {
 }
 
 const Testimonials = () => {
-
-  const test = shuffleArray(testimonials)
-    
+  const t = useTranslations();
+  const test = shuffleArray(testimonials);
+  const locale = useLocale();
   return (
     <div className="py-20 relative bg-[rgba(251,226,214,0.20)]">
         <div className="container">
-          <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'> Client Experiences </AnimatedTitle>
-          <p className='text-lightText text-xl mb-8 text-center'>Hear from others who have worked with me on their journey toward healing and growth.</p>
+          <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'>
+            {t('services_testimonials_title')}
+          </AnimatedTitle>
+          <p className='text-lightText text-xl mb-8 text-center'>
+            {t('services_testimonials_desc')}
+          </p>
           {/* Boxes */}
           <div className="flex flex-col md:flex-row gap-10">
-              {test.slice(0 , 2).map((test : {comment : string , name : string}, idx : number) => (
+              {test.slice(0 , 2).map((test : {comment : string , commentAr : string , name : string}, idx : number) => (
               <Magnetic strength={0.05} key={idx}>
                 <div
                     key={idx}
@@ -42,7 +48,7 @@ const Testimonials = () => {
                 >
                     <div className="absolute top-4 left-3"> {quotation} </div>
                     <p className="text-lg mb-2">
-                    {test.comment}
+                    {locale === "en" ? test.comment : test.commentAr}
                     </p>
                     <h4 className="text-2xl font-semibold text-secondaryText">— {test.name}</h4>
                     <div className="absolute bottom-4 right-3 rotate-180"> {quotation} </div>
