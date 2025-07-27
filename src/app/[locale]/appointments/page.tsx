@@ -40,7 +40,7 @@ const page = async ({searchParams} : {searchParams : Promise<{step : number}>}) 
   const token = (await cookies()).get("_auth")?.value
 
   if (!token) {
-    redirect("/")
+    redirect("/login")
   }
 
   const {step = 1} = await searchParams

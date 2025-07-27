@@ -35,7 +35,7 @@ export const services: Service[] = [
         title: "Holistic Walk & Talk Therapy by Phone",
         titleAr: "العلاج بالمشي والتحدث عبر الهاتف بشكل شامل",
         description: "Experience the unique benefits of integrating movement with therapy, wherever you are. Sally guides you through insightful conversations as you walk, fostering mind-body connection and fresh perspectives. It's a flexible, comfortable, and powerful way to move forward on your path to well-being.",
-        descriptionAr: "جرب الفوائد الفريدة لدمج الحركة مع العلاج، أينما كنت. سلمى ترشدك خلال محادثات عميقة أثناء المشي، مما يعزز الارتباط بين العقل والجسم ويمنحك وجهات نظر جديدة. إنها طريقة مرنة ومريحة وقوية للتقدم في مسارك نحو الرفاهية.",
+        descriptionAr: "جرب الفوائد الفريدة لدمج الحركة مع العلاج، أينما كنت. سالي ترشدك خلال محادثات عميقة أثناء المشي، مما يعزز الارتباط بين العقل والجسم ويمنحك وجهات نظر جديدة. إنها طريقة مرنة ومريحة وقوية للتقدم في مسارك نحو الرفاهية.",
         duration: "60 Mins",
         durationAr: "60 دقيقة",
         price: "200"
@@ -45,7 +45,7 @@ export const services: Service[] = [
         title: "Holistic Walk & Talk Therapy In Person",
         titleAr: "العلاج بالمشي والتحدث بشكل شخصي وشامل",
         description: "Experience the unique benefits of integrating movement with therapy, if you live in Geneva in Switzerland or somewhere close to there Sally guides you through insightful conversations as you walk, fostering mind-body connection and fresh perspectives. It's a flexible, comfortable, and powerful way to move forward on your path to well-being.",
-        descriptionAr: "جرب الفوائد الفريدة لدمج الحركة مع العلاج، إذا كنت تعيش في جنيف في سويسرا أو بالقرب منها، سلمى ترشدك خلال محادثات عميقة أثناء المشي، مما يعزز الارتباط بين العقل والجسم ويمنحك وجهات نظر جديدة. إنها طريقة مرنة ومريحة وقوية للتقدم في مسارك نحو الرفاهية.",
+        descriptionAr: "جرب الفوائد الفريدة لدمج الحركة مع العلاج، إذا كنت تعيش في جنيف في سويسرا أو بالقرب منها، سالي ترشدك خلال محادثات عميقة أثناء المشي، مما يعزز الارتباط بين العقل والجسم ويمنحك وجهات نظر جديدة. إنها طريقة مرنة ومريحة وقوية للتقدم في مسارك نحو الرفاهية.",
         duration: "60 Mins",
         durationAr: "60 دقيقة",
         price: "200"

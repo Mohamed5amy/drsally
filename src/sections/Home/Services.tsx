@@ -56,7 +56,7 @@ const Services = () => {
     }, []);
     
   return (
-    <div className='py-0 sm:py-20 container'>
+    <div className='py-6 sm:py-20 container'>
         <AnimatedTitle className='text-primaryText mb-2 text-[24px] md:text-[32px] font-bold text-center'>
           {t("servicesTitle")}
         </AnimatedTitle>

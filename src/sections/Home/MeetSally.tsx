@@ -8,7 +8,7 @@ const MeetSally = async () => {
     
     return (
         <div className="bg-[url('/main2.svg')] bg-fixed bg-cover bg-center">
-            <div className="container flex justify-end pb-32 pt-24">
+            <div className="container flex pb-32 pt-24">
                 <div className="max-w-[624px]">
                     <p className="text-[32px] font-bold text-primary mb-2">{t("meetSally")}</p>
                     <AnimatedTitle className="text-[32px] font-bold text-primaryText mb-2">{t("empatheticTherapist")}</AnimatedTitle>
@@ -20,19 +20,19 @@ const MeetSally = async () => {
                     </p>
                     <div className="flex flex-col gap-4 mb-10">
                         <div className="text-primaryText text-xl flex gap-2">
-                            <div className="flex-1">{star}</div>
+                            <div>{star}</div>
                             <p><strong>{t("compassionateDirect")}</strong> {t("compassionateDescription")}</p>
                         </div>
                         <div className="text-primaryText text-xl flex gap-2">
-                            <div className="flex-1">{star}</div>
+                            <div>{star}</div>
                             <p><strong>{t("internationalExperience")}</strong> {t("internationalDescription")}</p>
                         </div>
                         <div className="text-primaryText text-xl flex gap-2">
-                            <div className="flex-1">{star}</div>
+                            <div>{star}</div>
                             <p><strong>{t("holisticApproach")}</strong> {t("holisticDescription")}</p>
                         </div>
                         <div className="text-primaryText text-xl flex gap-2">
-                            <div className="flex-1">{star}</div>
+                            <div>{star}</div>
                             <p><strong>{t("resultsOriented")}</strong> {t("resultsDescription")}</p>
                         </div>
                     </div>

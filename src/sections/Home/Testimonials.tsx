@@ -69,7 +69,7 @@ const Testimonials = () => {
       }, []);
     
   return (
-    <div dir="ltr" className="py-4 sm:py-8 lg:py-20 overflow-hidden relative mb-0 md:mb-36" ref={sectionRef}>
+    <div className="py-4 sm:py-8 lg:py-20 overflow-hidden relative mb-0 md:mb-36" ref={sectionRef}>
         <AnimatedTitle className='text-primaryText mb-2 text-[32px] font-bold text-center'>
           {t("clientExperiencesTitle")}
         </AnimatedTitle>
@@ -77,11 +77,12 @@ const Testimonials = () => {
           {t("clientExperiencesDescription")}
         </p>
         {/* Boxes */}
-        <div className="flex gap-10" ref={containerRef}>
+        <div className="flex gap-10" ref={containerRef} dir="ltr">
             {testimonials.slice(0 , 10).map((testimonial, idx) => (
             <div
                 key={idx}
                 className="min-w-[90vw] max-w-[90vw] md:min-w-[45vw] md:max-w-[45vw] py-12 px-10 rounded-2xl bg-textPrimary relative testimonial-box"
+                dir={locale === "en" ? "ltr" : "rtl"}
             >
                 <div className="absolute top-4 left-3"> {quotation} </div>
                 <p className="text-sm lg:text-lg mb-2">

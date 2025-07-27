@@ -1,14 +1,14 @@
 
 import AnimatedTitle from "@/components/AnimatedTitle"
 import Button from "@/components/custom/Button"
-import { calenderIcon, star } from "@/icons"
+import { calenderIcon } from "@/icons"
 import { getTranslations } from 'next-intl/server';
 
 const MyPhilosophy = async () => {
   const t = await getTranslations();
   return (
     <div className="bg-[url('/main2.svg')] bg-fixed bg-cover bg-center relative">
-        <div className="container flex justify-end pb-32 pt-24">
+        <div className="container pb-32 pt-24">
             <div className="max-w-[624px]">
                 <AnimatedTitle className="text-[32px] font-bold text-primaryText mb-2">{t('about_philosophy_title')}</AnimatedTitle>
                 <p className="text-xl text-lightText mb-2">

@@ -43,7 +43,7 @@ const Nav = () => {
           {list.map((item , i) => {
             return (
               <Link href={item.link} key={i} 
-              className={`text-lg font-semibold ${pathname === item.link ? "text-primary active" : "text-secondaryText"} px-2 relative`}>
+              className={`text-lg font-semibold ${pathname.includes(item.link) ? "text-primary active" : "text-secondaryText"} px-2 relative`}>
                 {item.name}
                 <div className={`${pathname === item.link ? "absolute" : "hidden"} left-1/2 -translate-x-1/2 -bottom-8 w-10 h-8 scale-125 z-0 rotate-[50deg]`}>
                   <Image src={"/flower.svg"} alt="Flower Image" width={40} height={30} className="w-full h-full" />
