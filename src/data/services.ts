@@ -7,9 +7,21 @@ export interface Service {
     duration: string;
     durationAr: string;
     price: string;
+    discountPrice: string;
 }
 
 export const services: Service[] = [
+    {
+        id: 0,
+        title: "15-Mins Free Consultation",
+        titleAr: "استشارة مجانية لمدة 15 دقيقة",
+        description: "This free consultation is designed to give you a feel for our approach and see if it's the right fit for you. To confirm your spot, a $10 seriousness fee is required — this amount will be fully deducted from your first paid session.",
+        descriptionAr: "هذه الاستشارة المجانية مصممة لتمنحك فكرة عن أسلوبنا وتساعدك على تحديد ما إذا كانت مناسبة لك. لتأكيد الحجز، يُطلب دفع مبلغ رمزي قدره 10 دولارات كدليل على الجدية — وسيتم خصم هذا المبلغ بالكامل من أول جلسة مدفوعة.",
+        duration: "15 Mins",
+        durationAr: "15 دقيقة",
+        price: "10",
+        discountPrice : ""
+    },
     {
         id: 1,
         title: "Individual Holistic Psychotherapy",
@@ -18,7 +30,8 @@ export const services: Service[] = [
         descriptionAr: "في You Matter by Sally Mounir، نقدم مسارًا فريدًا للنمو الفردي والرفاهية الدائمة. نعالج العقل والجسم والعواطف والروح لتعزيز الشفاء العميق الذي يتجاوز الأعراض فقط. اكتسب أدوات مخصصة واكتشف حكمتك الداخلية لرحلة تحول حقيقية.",
         duration: "60 Mins",
         durationAr: "60 دقيقة",
-        price: "200"
+        price: "200",
+        discountPrice : "190"
     },
     {
         id: 2,
@@ -28,7 +41,8 @@ export const services: Service[] = [
         descriptionAr: "في You Matter by Sally Mounir، نساعد الأزواج على تعميق رابطتهم والتغلب على التحديات بشكل شامل. نستكشف التواصل والرفاهية الفردية وديناميكيات العلاقة لتعزيز التفاهم العميق. اكتسب أدوات عملية وقوِّي ارتباطك لعلاقة أكثر إشباعًا.",
         duration: "90 Mins",
         durationAr: "90 دقيقة",
-        price: "300"
+        price: "300",
+        discountPrice : "290"
     },
     {
         id: 3,
@@ -38,7 +52,8 @@ export const services: Service[] = [
         descriptionAr: "جرب الفوائد الفريدة لدمج الحركة مع العلاج، أينما كنت. سالي ترشدك خلال محادثات عميقة أثناء المشي، مما يعزز الارتباط بين العقل والجسم ويمنحك وجهات نظر جديدة. إنها طريقة مرنة ومريحة وقوية للتقدم في مسارك نحو الرفاهية.",
         duration: "60 Mins",
         durationAr: "60 دقيقة",
-        price: "200"
+        price: "200",
+        discountPrice : "190"
     },
     {
         id: 4,
@@ -48,6 +63,7 @@ export const services: Service[] = [
         descriptionAr: "جرب الفوائد الفريدة لدمج الحركة مع العلاج، إذا كنت تعيش في جنيف في سويسرا أو بالقرب منها، سالي ترشدك خلال محادثات عميقة أثناء المشي، مما يعزز الارتباط بين العقل والجسم ويمنحك وجهات نظر جديدة. إنها طريقة مرنة ومريحة وقوية للتقدم في مسارك نحو الرفاهية.",
         duration: "60 Mins",
         durationAr: "60 دقيقة",
-        price: "200"
+        price: "200",
+        discountPrice : "190"
     }
 ];

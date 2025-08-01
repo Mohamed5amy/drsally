@@ -20,7 +20,7 @@ const Step1 = () => {
     const t = useTranslations()
     
     const handleNext = () => {
-        if(data.service === 0) {
+        if(data.service === -1) {
             toast.error('Please select a service')
         } else {
             if (isAuth) {
@@ -37,22 +37,60 @@ const Step1 = () => {
         <div className='container' data-aos="fade-up">
             <div className='flex flex-col md:flex-row lg:flex-col gap-4 mb-16'>
                 {services.map((item) => {
-                    if (item.id != 2) {
-                        return (
-                            <Card
-                                key={item.id}
-                                title={item.title}
-                                titleAr={item.titleAr}
-                                description={item.description}
-                                descriptionAr={item.descriptionAr}
-                                service={data.service}
-                                number={item.id}
-                                onBookClick={() => {item.id === data.service ? setData({service: 0}) : setData({service: item.id})}}
-                                duration={item.duration}
-                                durationAr={item.durationAr}
-                                price={item.price}
-                            />
-                        )
+                    if (data.service == 0) {
+                        if (item.id == 0) {
+                            return (
+                                <Card
+                                    key={item.id}
+                                    title={item.title}
+                                    titleAr={item.titleAr}
+                                    description={item.description}
+                                    descriptionAr={item.descriptionAr}
+                                    service={data.service}
+                                    number={item.id}
+                                    onBookClick={() => {item.id === data.service ? setData({service: -1}) : setData({service: item.id})}}
+                                    duration={item.duration}
+                                    durationAr={item.durationAr}
+                                    price={item.price}
+                                />
+                            )
+                        }
+                    } else if (data.service == 2) {
+                        if (item.id == 2) {
+                            return (
+                                <Card
+                                    key={item.id}
+                                    title={item.title}
+                                    titleAr={item.titleAr}
+                                    description={item.description}
+                                    descriptionAr={item.descriptionAr}
+                                    service={data.service}
+                                    number={item.id}
+                                    onBookClick={() => {item.id === data.service ? setData({service: -1}) : setData({service: item.id})}}
+                                    duration={item.duration}
+                                    durationAr={item.durationAr}
+                                    price={item.price}
+                                />
+                            )
+                        }
+                    } else {
+                        if (item.id != 0 && item.id != 2) {
+                            return (
+                                <Card
+                                    key={item.id}
+                                    title={item.title}
+                                    titleAr={item.titleAr}
+                                    description={item.description}
+                                    descriptionAr={item.descriptionAr}
+                                    service={data.service}
+                                    number={item.id}
+                                    onBookClick={() => {item.id === data.service ? setData({service: -1}) : setData({service: item.id})}}
+                                    duration={item.duration}
+                                    durationAr={item.durationAr}
+                                    price={item.price}
+                                />
+                            )
+                        }
                     }
                 })}
             </div>

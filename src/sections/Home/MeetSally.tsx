@@ -36,7 +36,7 @@ const MeetSally = async () => {
                             <p><strong>{t("resultsOriented")}</strong> {t("resultsDescription")}</p>
                         </div>
                     </div>
-                    <Button label={t("scheduleConsultation")} icon={calenderIcon} />
+                    <Button type="book" label={t("scheduleConsultation")} icon={calenderIcon} />
                 </div>
             </div>
         </div>

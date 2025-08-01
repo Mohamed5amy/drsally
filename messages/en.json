@@ -124,9 +124,11 @@
   "contact_form_title": "Send a message",
   "contact_name": "Name",
   "contact_email": "Email",
+  "contact_phone": "Mobile Number",
   "contact_message": "Message",
   "contact_name_placeholder": "Your Name",
   "contact_email_placeholder": "Your Email",
+  "contact_phone_placeholder": "Your Mobile Number",
   "contact_message_placeholder": "Your Message",
   "contact_send": "Send the message",
     "step_select_appointment": "Select Appointment",
@@ -228,6 +230,7 @@
     "Payment": "Payment",
     "Actions": "Actions",
     "Meeting": "Meeting",
+    "15 Mins": "15 Mins",
     "60 Mins": "60 Mins",
     "90 Mins": "90 Mins",
     "No Price": "No Price",
@@ -324,5 +327,8 @@
     "bookConsultation": "Book a Consultation",
     "contactMe": "Contact me",
     "clientExperiencesTitle": "Client Experiences",
-    "clientExperiencesDescription": "Hear from others who have worked with me on their journey toward healing and growth."
+    "clientExperiencesDescription": "Hear from others who have worked with me on their journey toward healing and growth.",
+    "Please make sure to fill all the fields" : "Please make sure to fill all the fields",
+    "Thanks for your message, I will get back to you ASAP" : "Thanks for your message, I will get back to you ASAP.",
+    "Something went wrong Kindly try again later" : "Something went wrong, Kindly try again later."
 }

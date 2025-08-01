@@ -5,6 +5,7 @@ import NormalButton from "@/components/custom/NormalButton"
 import ScaleBlurReveal from "@/components/ScaleBlurReveal"
 import Image from "next/image"
 import { useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 
 const FirstStep = () => {
   const t = useTranslations()
@@ -19,8 +20,8 @@ const FirstStep = () => {
         </h4>
         {/* Buttons */}
         <div className="flex items-center flex-col sm:flex-row justify-center gap-4">
-            <NormalButton label={t("bookConsultation")} />
-            <NormalButton label={t("contactMe")} styles="px-[70px] !bg-[rgba(250,251,251,0.60)] hover:!bg-secondary !text-primary border border-primary hover:px-[85px]" />
+            <Link href={"/appointments"}> <NormalButton label={t("bookConsultation")} /> </Link>
+            <Link href={"/contact"}><NormalButton label={t("contactMe")} styles="px-[70px] !bg-[rgba(250,251,251,0.60)] hover:!bg-secondary !text-primary border border-primary hover:px-[85px]" /></Link>
         </div>
         {/* Image */}
         <div className="absolute inset-0 z-[-1]"> 

@@ -23,7 +23,7 @@ const Specialized = async () => {
                 <span className="block h-2"></span>
                 {t("specializedTherapyDescription3")}
               </p>
-              <Button label={t("scheduleConsultation")} icon={calenderIcon} />
+              <Button type="book" label={t("scheduleConsultation")} icon={calenderIcon} />
             </Parallax>
         </div>
         {/* Image */}

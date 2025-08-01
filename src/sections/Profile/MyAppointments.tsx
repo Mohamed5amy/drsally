@@ -105,6 +105,8 @@ export function getServiceNameById(name: string): number | undefined {
 
 const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
 
+  console.log(bookings)
+
   const {setData} = useAppointmentStore()
   const t = useTranslations()
   const locale = useLocale()
@@ -227,7 +229,7 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
                     {format(timeStringToDate(reservation?.times[0]?.start_time), "h:mm a" , {locale : dateFnsLocale})}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
-                    {reservation.times.length === 2 ? t("60 Mins") : t("90 Mins")}
+                    {reservation.times.length === 2 ? t("60 Mins") : (reservation.times.length === 1 ? t("15 Mins") : t("90 Mins")) }
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700">
                     {t(reservation.type)}

@@ -51,9 +51,9 @@ const page = async ({searchParams} : {searchParams : Promise<{step : number}>}) 
   return (
     <div className='py-12 pb-16'>
         <Stepper currentStep={step} bookings={profile?.bookings?.length} />
-        {step == 1 && <Step1 />}
+        {step == 1 && <Step1 bookings={profile?.bookings?.length} />}
         {step == 2 && <Step2 days={days.availability} bookings={profile?.bookings?.length} />}
-        {step == 3 && <Step3 />}
+        {step == 3 && <Step3  bookings={profile?.bookings?.length} />}
         {step == 4 && <Step4 bookings={profile?.bookings?.length} />}
         {step == 5 && <Step5 />}
     </div>

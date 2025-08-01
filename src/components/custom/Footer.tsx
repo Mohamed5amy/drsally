@@ -23,12 +23,16 @@ const Footer = () => {
             <div className='flex justify-between flex-wrap gap-10 pb-8 border-b border-[#C8DCD7]'>
                 {/* Logo */}
                 <div className=''> <Image src={"/footerLogo.svg"} alt='Logo' width={236} height={150} /> </div>
-                {/* Quick Links */}
+                {/* Pages */}
                 <div className='capitalize'>
                     <h4 className='text-xl font-semibold mb-2'>{t('footer_quickLinks')}</h4>
                     <p className='pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>{t('footer_appointments')}</p>
                     <p className='pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>{t('footer_about')}</p>
                     <p className='pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>{t('footer_services')}</p>
+                </div>
+                {/* Quick Links */}
+                <div className='capitalize'>
+                    <h4 className='text-xl font-semibold mb-2'>{t('footer_quickLinks')}</h4>
                     <p className='pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>{t('footer_testimonials')}</p>
                     <p className='pb-2 transition-all hover:text-red-600 font-semibold text-lightText'>{t('footer_blog')}</p>
                     <p className='transition-all hover:text-red-600 font-semibold text-lightText'>{t('footer_contact')}</p>
@@ -53,14 +57,14 @@ const Footer = () => {
                     </div>
                 </div>
                 {/* Newsletter */}
-                <div className='max-w-[326px]'>
+                {/* <div className='max-w-[326px]'>
                     <h4 className='text-xl font-semibold mb-4'>{t('footer_subscribe')}</h4>
                     <p className='text-xl text-lightText mb-4'>{t('footer_subscribeDesc')}</p>
                     <div className='relative'>
                         <input type="email" placeholder={t('footer_emailPlaceholder')} className='p-4 rounded-full w-full caret-primary placeholder:text-lightText' />
                         <NormalButton label={t('footer_subscribe')} styles='py-3 px-6 hover:px-7 absolute end-1 top-1' />
                     </div>
-                </div>
+                </div> */}
             </div>
             {/* Lower */}
             <div className='flex flex-col gap-4 md:flex-row items-center justify-between'>

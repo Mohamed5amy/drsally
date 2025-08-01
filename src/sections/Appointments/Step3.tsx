@@ -66,7 +66,7 @@ function getThirtyMinuteIntervals(slot: string) {
     return intervals;
 }
 
-const Step3 = () => {
+const Step3 = ({bookings} : {bookings : number}) => {
 
     const t = useTranslations()
 
@@ -111,7 +111,7 @@ const Step3 = () => {
             booking_date : data?.day,
             type : service?.title,
             booking_times : getThirtyMinuteIntervals(data.slots || ""),
-            price : service?.price
+            price: bookings == 1 ? service?.discountPrice : service?.price,
         }
         setLoading(true)
         try {

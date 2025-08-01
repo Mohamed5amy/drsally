@@ -125,9 +125,11 @@
   "contact_form_title": "أرسل رسالة",
   "contact_name": "الاسم",
   "contact_email": "البريد الإلكتروني",
+  "contact_phone": "رقم الهاتف",
   "contact_message": "الرسالة",
   "contact_name_placeholder": "اسمك",
   "contact_email_placeholder": "بريدك الإلكتروني",
+  "contact_phone_placeholder": "رقم هاتفك",
   "contact_message_placeholder": "رسالتك",
   "contact_send": "أرسل الرسالة",
     "step_select_appointment": "اختر الموعد",
@@ -229,6 +231,7 @@
     "Payment": "الدفع",
     "Actions": "الإجراءات",
     "Meeting": "اجتماع",
+    "15 Mins": "15 دقيقة",
     "60 Mins": "60 دقيقة",
     "90 Mins": "90 دقيقة",
     "No Price": "لا يوجد سعر",
@@ -325,5 +328,8 @@
     "bookConsultation": "احجز استشارة",
     "contactMe": "اتصل بي",
         "clientExperiencesTitle": "ماذا يقول عملائي؟",
-    "clientExperiencesDescription": "استمع إلى تجارب الآخرين الذين عملوا معي في رحلتهم نحو الشفاء والنمو."
+    "clientExperiencesDescription": "استمع إلى تجارب الآخرين الذين عملوا معي في رحلتهم نحو الشفاء والنمو.",
+    "Please make sure to fill all the fields" : "من فضلك، تأكد من ملء جميع الحقول",
+    "Thanks for your message I will get back to you ASAP" : "شكرا ً على رسالتك، سأرد عليك في أقرب وقت ممكن",
+    "Something went wrong Kindly try again later" : "حدث خطأ ما، يرجى محاولة مرة أخرى في وقت لاحق"
 }

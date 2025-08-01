@@ -37,7 +37,7 @@ const Flexible = async () => {
               {t("flexibleTherapyDescription2")}
               <strong className="text-primaryText">{t("flexibleTherapyCallToAction")}</strong>
             </p>
-            <Button label={t("scheduleConsultation")} icon={calenderIcon} />
+            <Button type="book" label={t("scheduleConsultation")} icon={calenderIcon} />
           </Parallax>
         </div>
     </div>

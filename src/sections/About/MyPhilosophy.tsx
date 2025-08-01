@@ -8,7 +8,7 @@ const MyPhilosophy = async () => {
   const t = await getTranslations();
   return (
     <div className="bg-[url('/main2.svg')] bg-fixed bg-cover bg-center relative">
-        <div className="container pb-32 pt-24">
+        <div className="container pb-32 pt-24 flex justify-end">
             <div className="max-w-[624px]">
                 <AnimatedTitle className="text-[32px] font-bold text-primaryText mb-2">{t('about_philosophy_title')}</AnimatedTitle>
                 <p className="text-xl text-lightText mb-2">
@@ -26,7 +26,7 @@ const MyPhilosophy = async () => {
                 <p className="text-xl text-lightText mb-10">
                    {t('about_philosophy_p5')}
                 </p>
-                <Button label={t('about_philosophy_btn')} icon={calenderIcon} />
+                <Button type="book" label={t('about_philosophy_btn')} icon={calenderIcon} />
             </div>
         </div>
     </div>

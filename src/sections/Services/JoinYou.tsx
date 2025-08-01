@@ -17,7 +17,7 @@ const JoinYou = () => {
       </AnimatedTitle>
 
       {/* Buttons */}
-      <Button label={t("JoinYou_button")} icon={calenderIcon} />
+      <Button type="book" label={t("JoinYou_button")} icon={calenderIcon} />
 
       {/* Image */}
       <div className="absolute inset-0 z-[-1]">

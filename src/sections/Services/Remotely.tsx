@@ -19,7 +19,7 @@ const Remotely = async () => {
             <p className='text-xl text-secondaryText mb-10'>
               {t('Remotely_description')}
             </p>
-            <Button label={t('Remotely_button')} icon={calenderIcon} />
+            <Button type='book' label={t('Remotely_button')} icon={calenderIcon} />
           </Parallax>
         </div>
         <div className='flex-1'>

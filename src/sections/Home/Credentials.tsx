@@ -9,6 +9,7 @@ import { useEffect, useRef } from "react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useTranslations } from "next-intl"
+import { Link } from "@/i18n/navigation"
 
 const HoverLottie = dynamic(() => import('@/components/HoverLottie') , {ssr : false})
 
@@ -98,7 +99,7 @@ const Credentials = () => {
             </div>
         </div>
         {/* Button */}
-        <div ref={button}><NormalButton label={t("getInTouch")} /></div>
+        <Link href={"/contact"} ref={button}><NormalButton label={t("getInTouch")} /></Link>
     </div>
   )
 }

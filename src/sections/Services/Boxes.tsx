@@ -7,6 +7,7 @@ import Parallax from '@/components/Parallax'
 import { correct } from '@/icons'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation'
 
 
 const Boxes = () => {
@@ -35,7 +36,7 @@ const Boxes = () => {
                       <div className=' flex items-center gap-2 text-xs md:text-[16px]'> <p className='min-w-6'> {correct} </p> {t('services_boxes_individual_feature3')} </div>
                   </div>
                   {/* Book Session */}
-                  <NormalButton label={t('services_boxes_btn')} />
+                  <Link href={"/appointments"}><NormalButton label={t('services_boxes_btn')} /></Link>
                   {/* Flower */}
                   <Image src={"/flower.svg"} alt='flower image' width={136} height={180} className='absolute end-0 bottom-0 group-hover:end-20 z-0 group-hover:scale-[2] group-hover:bottom-8 transition-all duration-1000' />
               </div>
@@ -53,7 +54,7 @@ const Boxes = () => {
                       <div className=' flex items-center gap-2 text-xs md:text-[16px]'> <p className='min-w-6'> {correct} </p> {t('services_boxes_specialized_feature3')} </div>
                   </div>
                   {/* Book Session */}
-                  <NormalButton label={t('services_boxes_btn')} />
+                  <Link href={"/appointments"}><NormalButton label={t('services_boxes_btn')} /></Link>
                   {/* Flower */}
                   <Image src={"/flower.svg"} alt='flower image' width={136} height={180} className='absolute end-0 bottom-0 group-hover:end-20 z-0 group-hover:scale-[2] group-hover:bottom-8 transition-all duration-1000' />
               </div>

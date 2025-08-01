@@ -15,7 +15,7 @@ const Card: React.FC<ServiceCardProps> = ({
   durationAr = "1 hour",
   onBookClick = () => console.log('Book service clicked'),
   price = "150",
-  service = 0,
+  service = -1,
   number = 0,
 }) => {
 

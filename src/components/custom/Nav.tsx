@@ -65,7 +65,7 @@ const Nav = () => {
             </div>
           </Dropdown>
         ) : (
-          <Link href={"/login"} className="hidden md:block"> <Button label={t("nav_login")} icon={homeIcon} /> </Link>
+          <Link href={"/login"} className="hidden md:block"> <Button type="" label={t("nav_login")} icon={homeIcon} /> </Link>
         )}
       </div>
       {/* Menu */}

@@ -89,7 +89,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
         handleSubmit()
     }
     const handlePrev = () => {
-        router.push('/appointments?step=1')
+        router.push(`/appointments/${id}?step=1`)
     }
 
     // Get Service
@@ -100,7 +100,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await getSlots(data?.day?.toString() || "" , service?.duration?.slice(0 , 2) || "" , user?.token || "")
+                const res = await getSlots(data?.day?.toString() || "" , (service?.duration?.slice(0, 2) == "15" ? "30" : service?.duration?.slice(0, 2)) || "" , user?.token || "")
                 setSlots(res[0])
             } catch (err) {
                 console.log(err)
@@ -129,7 +129,7 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                 <h4 className='text-primaryText text-lg md:text-xl lg:text-2xl font-semibold'> {t("select_date_time")} </h4>
                 <h4 className='text-secondaryText md:text-lg lg:text-xl font-semibold'> {t("time_zone")} </h4>
             </div>
-            <div className='p-5 bg-textPrimary rounded-3xl flex items-center gap-4 mb-14 flex-col md:flex-row'>
+            <div className='p-5 bg-textPrimary rounded-3xl flex items-center gap-4 flex-col md:flex-row'>
                 {/* Date Picker */}
                 <div className="flex flex-col gap-4 flex-1 cursor-pointer w-full">
                     <label htmlFor="date" className="md:text-xl font-bold">
@@ -169,10 +169,11 @@ const Step2 = ({days , bookings} : {days : string[] , bookings : number}) => {
                     </Select>
                 </div>
             </div>
+            <span className='block mb-14 text-red-500 opacity-60 mt-2'> If you don't want to change your slot, leave it blank otherwise select a new slot </span>
             {/* Buttons */}
             <div className='flex justify-end gap-4 flex-col-reverse sm:flex-row'>
                 <NormalButton onClick={handlePrev} loading={loading} label={t("back")} styles='px-20 hover:px-24 bg-transparent !text-secondaryText border border-secondaryText' />
-                <NormalButton onClick={handleNext} loading={loading} label={t("save")} styles='px-20 hover:px-24' />
+                <NormalButton onClick={handleNext} loading={loading} label={t("save")} styles='px-20 hover:px-24 capitalize' />
             </div>
         </div>
     )

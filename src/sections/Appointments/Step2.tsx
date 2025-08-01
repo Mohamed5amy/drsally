@@ -63,7 +63,7 @@ const Step2 = ({ days, bookings }: { days: string[]; bookings: number }) => {
       booking_date: data?.day,
       type: service?.title,
       booking_times: getThirtyMinuteIntervals(data.slots || ""),
-      price: service?.price,
+      price: bookings == 1 ? service?.discountPrice : service?.price,
     };
 
     setLoading(true);
@@ -106,7 +106,7 @@ const Step2 = ({ days, bookings }: { days: string[]; bookings: number }) => {
       try {
         const res = await getSlots(
           data?.day?.toString() || "",
-          service?.duration?.slice(0, 2) || "",
+          (service?.duration?.slice(0, 2) == "15" ? "30" : service?.duration?.slice(0, 2)) || "",
           user?.token || ""
         );
         setSlots(res[0]);
@@ -129,7 +129,7 @@ const Step2 = ({ days, bookings }: { days: string[]; bookings: number }) => {
         descriptionAr={service?.descriptionAr}
         duration={service?.duration}
         durationAr={service?.durationAr}
-        price={service?.price}
+        price={bookings == 1 ? service?.discountPrice : service?.price}
       />
       {/* Time */}
       <div className='flex items-center justify-between mt-12 mb-6 flex-col md:flex-row'>
