@@ -46,7 +46,7 @@ const Menu = ({ list }: { list: { name: string; link: string }[] }) => {
               <p className="transition-colors hover:text-secondary">{t('menu_login')}</p>
             </Link>
           )}
-          <div data-aos="fade-up" data-aos-delay={2400}><HandleLanguage /></div>
+          {/* <div data-aos="fade-up" data-aos-delay={2400}><HandleLanguage /></div> */}
         </div>
       )}
     </>

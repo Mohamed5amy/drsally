@@ -39,7 +39,7 @@ const Nav = () => {
       {/* List */}
       <div className="hidden lg:flex items-center gap-10">
         <div className="flex items-center">
-          <HandleLanguage />
+          {/* <HandleLanguage /> */}
           {list.map((item , i) => {
             return (
               <Link href={item.link} key={i} 
