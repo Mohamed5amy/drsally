@@ -22,6 +22,19 @@ const LoginForm = () => {
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
+  const handleRedirect = () => {
+    if (typeof window !== "undefined") {
+      const url = localStorage.getItem("redirectUrl");
+      if (url) {
+        router.push(url)
+      } else {
+        router.push("/")
+      }
+    } else {
+      router.push("/")
+    }
+  }
+
   // Login Function 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,17 +64,7 @@ const LoginForm = () => {
         
         if (isSignIn) {
           toast.success(t("Welcome") + " " + response.data.data.user.name);
-          if (typeof window !== "undefined") {
-            const url = Cookies.get("url");
-            if (url) {
-              router.push(url)
-              Cookies.remove("url")
-            } else {
-              router.push("/")
-            }
-          } else {
-            router.push("/")
-          }
+          handleRedirect()
         } else {
           toast.error(t("Something went wrong"));
         }
@@ -96,17 +99,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isAuth) {
-      if (typeof window !== "undefined") {
-        const url = Cookies.get("url");
-        if (url) {
-          router.push(url)
-          Cookies.remove("url")
-        } else {
-          router.push("/")
-        }
-      } else {
-        router.push("/")
-      }
+      handleRedirect()
     }
   } , [isAuth])
   

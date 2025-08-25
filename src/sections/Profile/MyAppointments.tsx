@@ -132,11 +132,11 @@ const MyAppointments = ({bookings} : {bookings : Reservation[]}) => {
 
   const handleReservationClick = (reservation: Reservation) => {
     const hours = getHoursUntilSwissTime(reservation.booking_date, reservation.times[0]?.start_time)
-    if (hours > 48) {
+    if (hours > 96) {
       setData({ booking_id: reservation.id , service: getServiceNameById(reservation.type) || 0 , day: reservation.booking_date, slots: reservation.times[0].start_time + "-" + reservation.times[reservation.times.length - 1].end_time });
       router.push(`/appointments/${reservation.id}`);
     } else {
-      toast.error("You can only reschedule appointments more than 48 hours in advance.");
+      toast.error("You can only reschedule appointments more than 4 days in advance.");
     }
   }
 

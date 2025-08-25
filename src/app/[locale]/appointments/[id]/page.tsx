@@ -1,5 +1,6 @@
 import { getDays } from '@/APIs/appointments'
 import { getProfileData } from '@/APIs/user'
+import LoginFirst from '@/components/custom/LoginFirst'
 import Step1 from '@/sections/Rebook/Step1'
 import Step2 from '@/sections/Rebook/Step2'
 import Stepper from '@/sections/Rebook/Stepper'
@@ -34,6 +35,12 @@ const page = async ({searchParams} : {searchParams : Promise<{step : number}>}) 
 
   const {step = 1} = await searchParams
   const token = (await cookies()).get("_auth")?.value
+
+  if (!token) {
+    return (
+      <LoginFirst />
+    )
+  }
 
   const days = await getDays(getNextWeekDate() , getNextMonthDate() , "90" , token || "")
   const profile = await getProfileData(token || "")

@@ -33,7 +33,7 @@ const Step1 = ({bookings} : {bookings : number}) => {
 
   return (
     <div className='container' data-aos='fade-up'>
-      <div className='flex flex-col md:flex-row lg:flex-col gap-4 mb-16'>
+      <div className='flex flex-col gap-4 mb-16'>
         {services.map((item) => {
           if (bookings >= 1 && item.id == 0) {
             return null;

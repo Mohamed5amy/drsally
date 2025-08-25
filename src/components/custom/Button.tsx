@@ -4,7 +4,7 @@ import { useRouter } from '@/i18n/navigation'
 import { useAppointmentStore } from '@/store/useAppointmentStore'
 import React, { ReactNode } from 'react'
 
-const Button = ({type , label , icon , disabled , onClick} : {type : "book" | "contact" | "" , label : string , icon : ReactNode , disabled? : boolean , onClick? : () => void}) => {
+const Button = ({type , label , icon , disabled , onClick} : {type? : "book" | "contact" | "" , label : string , icon : ReactNode , disabled? : boolean , onClick? : () => void}) => {
 
   const router = useRouter()
   const { setData } = useAppointmentStore();
