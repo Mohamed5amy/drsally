@@ -24,7 +24,7 @@ const LoginForm = () => {
 
   const handleRedirect = () => {
     if (typeof window !== "undefined") {
-      const url = localStorage.getItem("redirectUrl");
+      const url = sessionStorage.getItem("redirectUrl");
       if (url) {
         router.push(url)
       } else {
