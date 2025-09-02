@@ -17,6 +17,7 @@ const Card: React.FC<ServiceCardProps> = ({
   price = "150",
   service = -1,
   number = 0,
+  image = "/main2.svg",
 }) => {
 
     const [active, setActive] = useState(false)
@@ -47,7 +48,7 @@ const Card: React.FC<ServiceCardProps> = ({
                     <Image
                         width={256}
                         height={200}
-                        src={"/main2.svg"}
+                        src={image}
                         alt={title}
                         className="w-full h-full object-cover rounded-xl max-w-full"
                     />
@@ -109,6 +110,7 @@ interface ServiceCardProps {
   price?: string;
   service?: number;
   number?: number;
+  image?: string;
 }
 
 export default Card;

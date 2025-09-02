@@ -11,6 +11,7 @@ const SimpleCard: React.FC<ServiceCardProps> = ({
   duration = "1 hour",
   durationAr = "1 ساعة",
   price = "150",
+  image = "/main2.svg",
 }) => {
 
     const locale = useLocale();
@@ -25,7 +26,7 @@ const SimpleCard: React.FC<ServiceCardProps> = ({
                     <Image
                         width={256}
                         height={200}
-                        src={"/main2.svg"}
+                        src={image}
                         alt={title}
                         className="w-full h-full object-cover rounded-xl max-w-full"
                     />
@@ -80,6 +81,7 @@ interface ServiceCardProps {
   durationAr?: string;
   onBookClick?: () => void;
   price?: string;
+  image?: string;
 }
 
 export default SimpleCard;

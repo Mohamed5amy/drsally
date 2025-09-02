@@ -130,6 +130,7 @@ const Step2 = ({ days, bookings }: { days: string[]; bookings: number }) => {
         duration={service?.duration}
         durationAr={service?.durationAr}
         price={bookings == 1 ? service?.discountPrice : service?.price}
+        image={service?.image}
       />
       {/* Time */}
       <div className='flex items-center justify-between mt-12 mb-6 flex-col md:flex-row'>
@@ -152,11 +153,11 @@ const Step2 = ({ days, bookings }: { days: string[]; bookings: number }) => {
               <span className='absolute start-3 text-primary'> {calenderIcon} </span>
             </SelectTrigger>
             <SelectContent className='bg-white'>
-              {days?.map((day, index) => (
+              {days?.length > 0 ? days?.map((day, index) => (
                 <SelectItem key={index} value={day} className='transition-colors hover:bg-bg'>
                   {format(day, "EEE, d MMM  yyyy")}
                 </SelectItem>
-              ))}
+              )) : <p className='p-4 font-semibold'>{t("no_slots")}</p>}
             </SelectContent>
           </Select>
         </div>

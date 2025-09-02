@@ -47,6 +47,7 @@ const Step1 = ({bookings} : {bookings : number}) => {
                 descriptionAr={item.descriptionAr}
                 service={data.service}
                 number={item.id}
+                image={item.image}
                 onBookClick={() =>
                   item.id === data.service
                     ? setData({ service: -1 })

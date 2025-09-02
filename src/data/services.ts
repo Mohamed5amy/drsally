@@ -8,6 +8,7 @@ export interface Service {
     durationAr: string;
     price: string;
     discountPrice: string;
+    image?: string;
 }
 
 export const services: Service[] = [
@@ -20,7 +21,8 @@ export const services: Service[] = [
         duration: "15 Mins",
         durationAr: "15 دقيقة",
         price: "10",
-        discountPrice : ""
+        discountPrice : "",
+        image: "/main2.svg"
     },
     {
         id: 1,
@@ -31,7 +33,8 @@ export const services: Service[] = [
         duration: "60 Mins",
         durationAr: "60 دقيقة",
         price: "200",
-        discountPrice : "190"
+        discountPrice : "190",
+        image: "/service4.jpg"
     },
     {
         id: 2,
@@ -42,7 +45,8 @@ export const services: Service[] = [
         duration: "90 Mins",
         durationAr: "90 دقيقة",
         price: "300",
-        discountPrice : "290"
+        discountPrice : "290",
+        image: "/service2.jpg"
     },
     {
         id: 3,
@@ -53,7 +57,8 @@ export const services: Service[] = [
         duration: "60 Mins",
         durationAr: "60 دقيقة",
         price: "200",
-        discountPrice : "190"
+        discountPrice : "190",
+        image: "/service1.jpg"
     },
     {
         id: 4,
@@ -64,6 +69,7 @@ export const services: Service[] = [
         duration: "60 Mins",
         durationAr: "60 دقيقة",
         price: "200",
-        discountPrice : "190"
+        discountPrice : "190",
+        image: "/service3.jpg"
     }
 ];
